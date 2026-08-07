@@ -1,272 +1,810 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Belaw Ec · Asesoría Legal Empresarial · Ecuador</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <style>
-    :root{--gold:#B8913A;--gold2:#CDA94A;--gdim:rgba(184,145,58,.12)}
-    [data-theme=dark]{--bg:#0D0D0D;--bg2:#141414;--bg3:#1A1A1A;--bgc:#111111;--t1:#F0EBE1;--t2:#9A9388;--t3:#5A5550;--b:rgba(184,145,58,.18);--b2:rgba(255,255,255,.06);--nav:rgba(13,13,13,.93);--sh:0 12px 48px rgba(0,0,0,.55)}
-    [data-theme=light]{--bg:#F5F2EC;--bg2:#EDE9E0;--bg3:#E4DFD0;--bgc:#FDFCF9;--t1:#18160F;--t2:#5A5448;--t3:#9A9388;--b:rgba(110,80,15,.2);--b2:rgba(0,0,0,.06);--nav:rgba(245,242,236,.95);--sh:0 12px 48px rgba(0,0,0,.1)}
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    html{scroll-behavior:smooth}
-    body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--t1);overflow-x:hidden;transition:background .35s,color .35s}
-    img{display:block;width:100%;object-fit:cover}
-    a{text-decoration:none;color:inherit}
-    #nav{position:fixed;top:0;left:0;right:0;z-index:900;background:var(--nav);backdrop-filter:blur(18px);border-bottom:1px solid var(--b);transition:background .35s}
-    .nav-in{max-width:1240px;margin:0 auto;padding:0 5%;height:68px;display:flex;align-items:center;justify-content:space-between;gap:20px}
-    .logo{display:flex;align-items:center;gap:10px}
-    .logo-sq{width:34px;height:34px;border:1.5px solid var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-weight:600;color:var(--gold);flex-shrink:0}
-    .logo-nm{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.25rem;letter-spacing:.06em}
-    .logo-nm b{color:var(--gold)}
-    .nav-ul{display:flex;gap:28px;list-style:none}
-    .nav-ul a{font-size:.7rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--t2);transition:color .2s}
-    .nav-ul a:hover{color:var(--gold)}
-    .nav-r{display:flex;align-items:center;gap:10px}
-    .btn-th{width:38px;height:38px;border:1px solid var(--b);background:transparent;cursor:pointer;color:var(--t2);font-size:1.1rem;display:flex;align-items:center;justify-content:center;transition:all .2s}
-    .btn-th:hover{border-color:var(--gold);color:var(--gold)}
-    .btn-cta{background:var(--gold);color:#0D0D0D;padding:.5rem 1.4rem;font-size:.7rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;border:none;cursor:pointer;transition:background .2s;display:inline-block}
-    .btn-cta:hover{background:var(--gold2)}
-    #hero{position:relative;height:100vh;min-height:600px;padding-top:68px;display:flex;align-items:center}
-    .hero-content{max-width:1240px;margin:0 auto;padding:0 5%;width:100%}
-    .hero-tag{font-size:.65rem;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:18px}
-    .hero-tag::before{content:'✓ ';margin-right:8px}
-    h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,4vw,4rem);font-weight:400;line-height:1.08;color:var(--t1);margin-bottom:16px}
-    h1 em{font-style:italic;color:var(--gold)}
-    .hero-desc{font-size:.88rem;font-weight:300;line-height:1.85;color:var(--t2);max-width:420px;margin-bottom:26px}
-    .hero-btns{display:flex;gap:12px;flex-wrap:wrap}
-    .bp{background:var(--gold);color:#0D0D0D;padding:.78rem 1.7rem;font-size:.7rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;border:none;cursor:pointer;transition:background .2s,transform .2s;display:inline-flex;align-items:center;gap:7px}
-    .bp:hover{background:var(--gold2);transform:translateY(-2px)}
-    .sgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5px;background:var(--b2)}
-    .sc{background:var(--bgc);overflow:hidden;position:relative;transition:background .25s;cursor:pointer}
-    .sc:hover{background:var(--bg3)}
-    .sc::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .35s}
-    .sc:hover::after{transform:scaleX(1)}
-    .sci{height:155px;object-fit:cover;filter:grayscale(25%) brightness(.82);transition:filter .35s}
-    .sc:hover .sci{filter:grayscale(5%) brightness(.88)}
-    .scb{padding:22px 26px 26px}
-    .scn{font-family:'Cormorant Garamond',serif;font-size:1.7rem;color:var(--b2);line-height:1;margin-bottom:5px}
-    .scname{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:400;color:var(--t1);margin-bottom:8px;line-height:1.25}
-    .scd{font-size:.8rem;font-weight:300;color:var(--t2);line-height:1.75}
-    .sctag{display:inline-block;margin-top:12px;font-size:.62rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);border:1px solid var(--b);padding:4px 9px}
-    .sec{padding:90px 5%;max-width:1240px;margin:0 auto}
-    .ey{font-size:.65rem;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
-    .ey::before{content:'';width:22px;height:1px;background:var(--gold);display:inline-block;margin-right:10px}
-    .sh{font-family:'Cormorant Garamond',serif;font-size:clamp(1.85rem,3vw,2.9rem);font-weight:400;line-height:1.15;color:var(--t1);margin-bottom:12px}
-    .sh em{font-style:italic;color:var(--gold)}
-    .sp{font-size:.88rem;font-weight:300;line-height:1.85;color:var(--t2);max-width:500px}
-    .ag{display:grid;grid-template-columns:1fr 1.05fr;gap:70px;align-items:center}
-    .aim{position:relative}
-    .ai{aspect-ratio:4/5;object-fit:cover;filter:grayscale(15%) brightness(.88)}
-    .ab{position:absolute;bottom:-22px;right:-22px;background:var(--gold);padding:22px 26px;text-align:center}
-    .ab-n{font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:600;color:#0D0D0D;line-height:1}
-    .abody{font-size:.88rem;font-weight:300;line-height:1.9;color:var(--t2);margin-top:14px}
-    .abody p+p{margin-top:10px}
-    .sbg{background:var(--bg2)}
-    .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(4px);z-index:1000;animation:fadeIn .3s}
-    .modal-overlay.on{display:flex;align-items:center;justify-content:center}
-    .modal{background:var(--bg2);border:1px solid var(--b);border-radius:12px;width:90%;max-width:900px;max-height:85vh;overflow-y:auto;animation:slideUp .4s;position:relative}
-    .modal-close{position:absolute;top:20px;right:20px;width:40px;height:40px;background:none;border:1px solid var(--b);color:var(--t2);font-size:1.4rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;z-index:10}
-    .modal-close:hover{border-color:var(--gold);color:var(--gold)}
-    .modal-head{padding:40px 40px 20px;border-bottom:1px solid var(--b)}
-    .modal-head h2{font-family:'Cormorant Garamond',serif;font-size:2rem;color:var(--t1);margin-bottom:8px}
-    .modal-head p{font-size:.85rem;color:var(--t2)}
-    .modal-body{padding:40px}
-    .mgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-    .mcard{background:var(--bgc);border:1px solid var(--b);padding:32px 24px;text-align:center;transition:all .3s}
-    .mcard:hover{border-color:var(--gold);transform:translateY(-4px)}
-    .mcard.featured{border-color:var(--gold);background:var(--gdim)}
-    .mcard-name{font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--t1);margin-bottom:8px}
-    .mcard-price{font-size:2rem;color:var(--gold);font-weight:600;margin-bottom:4px}
-    .mcard-feats{list-style:none;margin-bottom:24px;text-align:left;font-size:.8rem}
-    .mcard-feats li{padding:8px 0;color:var(--t2);border-bottom:1px solid var(--b)}
-    .mcard-feats li::before{content:'✓ ';color:var(--gold);font-weight:600;margin-right:4px}
-    .footer{background:var(--bg2);border-top:1px solid var(--b);padding:60px 5%;margin-top:80px}
-    .footer-in{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px}
-    .footer-t{font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
-    .footer-l{list-style:none;font-size:.85rem}
-    .footer-l li{margin-bottom:10px}
-    .footer-l a{color:var(--t2);transition:color .2s}
-    .footer-l a:hover{color:var(--gold)}
-    @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-    @keyframes slideUp{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}
-    @media(max-width:1040px){.sgrid{grid-template-columns:repeat(2,1fr)}.ag{grid-template-columns:1fr;gap:44px}.aim{max-width:480px}.nav-ul{display:none}.mgrid{grid-template-columns:1fr}.footer-in{grid-template-columns:1fr 1fr;gap:32px}}
-    @media(max-width:640px){.sec{padding:60px 5%}.sgrid{grid-template-columns:1fr}.mgrid{gap:16px}.modal{width:95%;max-height:90vh}}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Belaw Ec · Asesoría Legal Empresarial · Ecuador</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* =====================================================
+   INSTRUCCIONES PARA IMÁGENES PROPIAS:
+   Crea una carpeta /img/ junto al archivo HTML y coloca:
+     banner1.jpg, banner2.jpg, banner3.jpg
+     equipo.jpg, compliance.jpg
+     servicio1.jpg a servicio9.jpg
+   Luego reemplaza cada src="https://..." por src="img/nombre.jpg"
+   ===================================================== */
+:root{--gold:#B8913A;--gold2:#CDA94A;--gdim:rgba(184,145,58,.12)}
+[data-theme=dark]{
+  --bg:#0D0D0D;--bg2:#141414;--bg3:#1A1A1A;--bgc:#111111;
+  --t1:#F0EBE1;--t2:#9A9388;--t3:#5A5550;
+  --b:rgba(184,145,58,.18);--b2:rgba(255,255,255,.06);
+  --nav:rgba(13,13,13,.93);--sh:0 12px 48px rgba(0,0,0,.55);
+  --scrim:linear-gradient(90deg,#0D0D0D 0%,rgba(13,13,13,.55) 55%,transparent 100%)}
+[data-theme=light]{
+  --bg:#F5F2EC;--bg2:#EDE9E0;--bg3:#E4DFD0;--bgc:#FDFCF9;
+  --t1:#18160F;--t2:#5A5448;--t3:#9A9388;
+  --b:rgba(110,80,15,.2);--b2:rgba(0,0,0,.06);
+  --nav:rgba(245,242,236,.95);--sh:0 12px 48px rgba(0,0,0,.1);
+  --scrim:linear-gradient(90deg,#F5F2EC 0%,rgba(245,242,236,.55) 55%,transparent 100%)}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--t1);overflow-x:hidden;transition:background .35s,color .35s}
+img{display:block;width:100%;object-fit:cover}
+a{text-decoration:none;color:inherit}
+
+/* NAV */
+#nav{position:fixed;top:0;left:0;right:0;z-index:900;background:var(--nav);backdrop-filter:blur(18px);border-bottom:1px solid var(--b);transition:background .35s,border-color .35s}
+.nav-in{max-width:1240px;margin:0 auto;padding:0 5%;height:68px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-sq{width:34px;height:34px;border:1.5px solid var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-weight:600;font-size:.95rem;color:var(--gold);flex-shrink:0}
+.logo-nm{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.25rem;letter-spacing:.06em;color:var(--t1);transition:color .35s}
+.logo-nm b{color:var(--gold)}
+.nav-ul{display:flex;gap:28px;list-style:none}
+.nav-ul a{font-size:.7rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--t2);transition:color .2s;white-space:nowrap}
+.nav-ul a:hover{color:var(--gold)}
+.nav-r{display:flex;align-items:center;gap:10px}
+.btn-th{width:38px;height:38px;border:1px solid var(--b);background:transparent;cursor:pointer;color:var(--t2);font-size:1.1rem;display:flex;align-items:center;justify-content:center;transition:all .2s;line-height:1}
+.btn-th:hover{border-color:var(--gold);color:var(--gold)}
+.btn-cta{background:var(--gold);color:#0D0D0D;padding:.5rem 1.4rem;font-size:.7rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;border:none;cursor:pointer;transition:background .2s;white-space:nowrap;display:inline-block}
+.btn-cta:hover{background:var(--gold2)}
+.hbg{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:6px}
+.hbg span{display:block;width:20px;height:1.5px;background:var(--t2);transition:background .35s}
+.mob{display:none;position:fixed;top:68px;left:0;right:0;background:var(--bg2);border-bottom:1px solid var(--b);z-index:899;padding:24px 5%;flex-direction:column;gap:16px;transition:background .35s}
+.mob.on{display:flex}
+.mob a{font-size:.85rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--t2);transition:color .2s}
+.mob a:hover{color:var(--gold)}
+
+/* HERO */
+#hero{position:relative;height:100vh;min-height:600px;overflow:hidden}
+.slides{width:100%;height:100%;position:relative}
+.slide{position:absolute;inset:0;display:grid;grid-template-columns:1fr 1fr;opacity:0;transition:opacity .9s;pointer-events:none}
+.slide.on{opacity:1;pointer-events:auto}
+.sl-l{display:flex;flex-direction:column;justify-content:center;padding:110px 5% 80px 10%;background:var(--bg);position:relative;z-index:2;transition:background .35s}
+.sl-l::after{content:'';position:absolute;top:0;right:-60px;bottom:0;width:120px;background:linear-gradient(90deg,var(--bg),transparent);pointer-events:none;transition:background .35s}
+.sl-tag{font-size:.65rem;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:18px;display:flex;align-items:center;gap:10px}
+.sl-tag::before{content:'';width:26px;height:1px;background:var(--gold);flex-shrink:0}
+.sl-h{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,4vw,4rem);font-weight:400;line-height:1.08;color:var(--t1);margin-bottom:16px;transition:color .35s}
+.sl-h em{font-style:italic;color:var(--gold)}
+.sl-p{font-size:.88rem;font-weight:300;line-height:1.85;color:var(--t2);max-width:420px;margin-bottom:26px;transition:color .35s}
+.sl-btns{display:flex;gap:12px;flex-wrap:wrap}
+.bp{background:var(--gold);color:#0D0D0D;padding:.78rem 1.7rem;font-size:.7rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;border:none;cursor:pointer;transition:background .2s,transform .2s;display:inline-flex;align-items:center;gap:7px}
+.bp:hover{background:var(--gold2);transform:translateY(-2px)}
+.bo{background:transparent;border:1px solid var(--b);color:var(--t2);padding:.78rem 1.7rem;font-size:.7rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:all .2s;display:inline-block}
+.bo:hover{border-color:var(--gold);color:var(--gold)}
+.sl-r{position:relative;overflow:hidden}
+.sl-img{width:100%;height:100%;object-fit:cover;filter:brightness(.72) saturate(.85);transition:transform 7s ease}
+.slide.on .sl-img{transform:scale(1.04)}
+.sl-scrim{position:absolute;inset:0;background:var(--scrim)}
+.sl-dots{position:absolute;bottom:32px;left:10%;display:flex;gap:8px;z-index:10;align-items:center}
+.sdot{width:22px;height:2px;background:var(--t3);cursor:pointer;transition:all .3s}
+.sdot.on{width:48px;background:var(--gold)}
+.sl-arrs{position:absolute;bottom:24px;right:5%;display:flex;gap:6px;z-index:10}
+.sarr{width:44px;height:44px;border:1px solid rgba(184,145,58,.4);background:rgba(0,0,0,.35);backdrop-filter:blur(6px);color:rgba(240,235,225,.7);font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .25s}
+.sarr:hover{border-color:var(--gold);color:var(--gold)}
+
+/* STATS */
+.stats{background:var(--bg2);border-top:1px solid var(--b);border-bottom:1px solid var(--b);padding:40px 5%;transition:background .35s,border-color .35s}
+.stats-in{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr)}
+.stat{text-align:center;padding:16px 12px;border-right:1px solid var(--b)}
+.stat:last-child{border-right:none}
+.stat-n{font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:600;color:var(--gold);line-height:1;margin-bottom:5px}
+.stat-l{font-size:.68rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--t2);transition:color .35s}
+
+/* LAYOUT */
+.sec{padding:90px 5%;max-width:1240px;margin:0 auto}
+.secf{padding:90px 0}
+.sec-in{max-width:1240px;margin:0 auto;padding:0 5%}
+.ey{font-size:.65rem;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.ey::before{content:'';width:22px;height:1px;background:var(--gold);flex-shrink:0}
+.sh{font-family:'Cormorant Garamond',serif;font-size:clamp(1.85rem,3vw,2.9rem);font-weight:400;line-height:1.15;color:var(--t1);margin-bottom:12px;transition:color .35s}
+.sh em{font-style:italic;color:var(--gold)}
+.sp{font-size:.88rem;font-weight:300;line-height:1.85;color:var(--t2);max-width:500px;transition:color .35s}
+.div{border:none;border-top:1px solid var(--b);margin:0 5%;transition:border-color .35s}
+
+/* ABOUT */
+.ag{display:grid;grid-template-columns:1fr 1.05fr;gap:70px;align-items:center}
+.aim{position:relative}
+.ai{aspect-ratio:4/5;object-fit:cover;filter:grayscale(15%) brightness(.88)}
+[data-theme=light] .ai{filter:grayscale(8%) brightness(.93)}
+.ab{position:absolute;bottom:-22px;right:-22px;background:var(--gold);padding:22px 26px;text-align:center}
+.ab-n{font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:600;color:#0D0D0D;line-height:1}
+.ab-l{font-size:.62rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(0,0,0,.65)}
+.abody{font-size:.88rem;font-weight:300;line-height:1.9;color:var(--t2);margin-top:14px;transition:color .35s}
+.abody p+p{margin-top:10px}
+.vals{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:24px}
+.val{display:flex;align-items:flex-start;gap:11px;padding:14px;border:1px solid var(--b);background:var(--bgc);transition:border .25s,background .25s}
+.val:hover{border-color:var(--gold);background:var(--gdim)}
+.vi{font-size:1.1rem;flex-shrink:0;margin-top:1px}
+.vn{font-size:.74rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--t1);transition:color .35s}
+.vd{font-size:.74rem;color:var(--t2);margin-top:2px;line-height:1.5;transition:color .35s}
+
+/* SERVICES */
+.sbg{background:var(--bg2);transition:background .35s}
+.shdr{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:44px;gap:24px;flex-wrap:wrap}
+.sgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5px;background:var(--b2)}
+.sc{background:var(--bgc);overflow:hidden;position:relative;transition:background .25s}
+.sc:hover{background:var(--bg3)}
+.sc::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .35s}
+.sc:hover::after{transform:scaleX(1)}
+.sci{height:155px;object-fit:cover;filter:grayscale(25%) brightness(.82);transition:filter .35s}
+[data-theme=light] .sci{filter:grayscale(15%) brightness(.9)}
+.sc:hover .sci{filter:grayscale(5%) brightness(.88)}
+.scb{padding:22px 26px 26px}
+.scn{font-family:'Cormorant Garamond',serif;font-size:1.7rem;color:var(--b2);line-height:1;margin-bottom:5px;transition:color .25s}
+.sc:hover .scn{color:rgba(184,145,58,.25)}
+.scname{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:400;color:var(--t1);margin-bottom:8px;line-height:1.25;transition:color .35s}
+.scd{font-size:.8rem;font-weight:300;color:var(--t2);line-height:1.75;transition:color .35s}
+.sctag{display:inline-block;margin-top:12px;font-size:.62rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);border:1px solid var(--b);padding:4px 9px;transition:border-color .35s}
+
+/* COMPLIANCE */
+.cbg{background:var(--bg);transition:background .35s}
+.cwm{position:absolute;right:-1%;top:50%;transform:translateY(-50%);font-family:'Cormorant Garamond',serif;font-size:clamp(4.5rem,10vw,8.5rem);font-weight:600;color:var(--b);opacity:.45;pointer-events:none;white-space:nowrap;user-select:none}
+.cg{display:grid;grid-template-columns:1.1fr 1fr;gap:68px;align-items:center;position:relative;z-index:1}
+.cimg{aspect-ratio:5/6;object-fit:cover;filter:grayscale(18%) brightness(.85)}
+[data-theme=light] .cimg{filter:grayscale(8%) brightness(.92)}
+.csteps{display:flex;flex-direction:column;gap:14px;margin-top:24px}
+.cs{display:flex;gap:14px;align-items:flex-start;padding:16px;border:1px solid var(--b);background:var(--bgc);transition:border .25s,background .25s}
+.cs:hover{border-color:var(--gold);background:var(--gdim)}
+.csn{width:34px;height:34px;flex-shrink:0;border:1px solid var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:.95rem;color:var(--gold)}
+.cs h4{font-size:.82rem;font-weight:600;color:var(--t1);margin-bottom:2px;transition:color .35s}
+.cs p{font-size:.78rem;font-weight:300;color:var(--t2);line-height:1.7;transition:color .35s}
+.ctags{display:flex;gap:7px;flex-wrap:wrap;margin-top:18px}
+.ctag{font-size:.62rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);border:1px solid var(--b);padding:5px 11px;transition:background .2s,border-color .35s}
+.ctag:hover{background:var(--gdim)}
+
+/* PROCESS */
+.pbg{background:var(--bg2);transition:background .35s}
+.pgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5px;background:var(--b2);margin-top:52px}
+.ps{background:var(--bgc);padding:36px 26px;position:relative;transition:background .25s}
+.ps:hover{background:var(--bg3)}
+.ps:not(:last-child)::after{content:'→';position:absolute;top:36px;right:-13px;width:26px;height:26px;background:var(--gold);color:#0D0D0D;font-size:.95rem;font-weight:700;display:flex;align-items:center;justify-content:center;z-index:2;line-height:26px;text-align:center}
+.pn{font-family:'Cormorant Garamond',serif;font-size:3.2rem;font-weight:600;color:var(--b2);line-height:1;margin-bottom:12px}
+.pname{font-size:.78rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--t1);margin-bottom:8px;transition:color .35s}
+.pd{font-size:.78rem;font-weight:300;color:var(--t2);line-height:1.75;transition:color .35s}
+
+/* CONTACT */
+.contbg{background:var(--bg);transition:background .35s}
+.contg{display:grid;grid-template-columns:1fr 1.25fr;gap:68px;align-items:start}
+.cinfo{padding-top:6px}
+.cdet{display:flex;gap:13px;align-items:flex-start;padding:16px 0;border-bottom:1px solid var(--b);transition:border-color .35s}
+.cdet:first-of-type{margin-top:24px;border-top:1px solid var(--b)}
+.cico{width:40px;height:40px;flex-shrink:0;border:1px solid var(--b);display:flex;align-items:center;justify-content:center;font-size:.95rem;transition:all .2s}
+.cdet:hover .cico{border-color:var(--gold);background:var(--gdim)}
+.cdl{font-size:.62rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:2px}
+.cdv{font-size:.85rem;color:var(--t1);transition:color .35s}
+
+/* FORM */
+.fbox{background:var(--bgc);border:1px solid var(--b);padding:40px;transition:background .35s,border-color .35s}
+.ftt{font-family:'Cormorant Garamond',serif;font-size:1.65rem;color:var(--t1);margin-bottom:4px;transition:color .35s}
+.fsub{font-size:.8rem;font-weight:300;color:var(--t2);margin-bottom:24px;transition:color .35s}
+.fr{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+.fr.full{grid-template-columns:1fr}
+.fg{display:flex;flex-direction:column;gap:5px}
+.fg label{font-size:.62rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
+.fg input,.fg select,.fg textarea{background:var(--bg2);border:1px solid var(--b);color:var(--t1);padding:10px 12px;font-family:'Inter',sans-serif;font-size:.83rem;font-weight:400;transition:border .2s,background .2s,color .35s;-webkit-appearance:none;border-radius:0;outline:none}
+.fg select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23B8913A'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 11px center;cursor:pointer}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--gold);background:var(--bg3)}
+.fg textarea{resize:vertical;min-height:72px}
+.fsub-btn{width:100%;margin-top:4px;background:var(--gold);color:#0D0D0D;border:none;padding:14px;font-family:'Inter',sans-serif;font-size:.76rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;transition:background .25s;display:flex;align-items:center;justify-content:center;gap:9px}
+.fsub-btn:hover{background:var(--gold2)}
+.fnote{font-size:.7rem;color:var(--t3);margin-top:10px;text-align:center;transition:color .35s}
+.fok{display:none;border:1px solid var(--gold);background:var(--gdim);padding:28px;text-align:center;margin-top:10px}
+.fok.on{display:block}
+.fok-i{font-size:2rem;margin-bottom:8px}
+.fok h4{font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--t1);margin-bottom:6px}
+.fok p{font-size:.8rem;color:var(--t2);line-height:1.7}
+
+/* CALENDAR */
+.calwrap{margin-top:12px}
+.callbl{font-size:.62rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.calbox{background:var(--bg2);border:1px solid var(--b);padding:14px;transition:background .35s,border-color .35s}
+.calnav{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.calmo{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:400;color:var(--t1);transition:color .35s}
+.calarr{background:none;border:1px solid var(--b);color:var(--t2);width:28px;height:28px;cursor:pointer;font-size:.85rem;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.calarr:hover{border-color:var(--gold);color:var(--gold)}
+.caldow{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:3px}
+.caldow span{font-size:.6rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--t3);text-align:center;padding:3px 0}
+.caldays{display:grid;grid-template-columns:repeat(7,1fr);gap:2px}
+.cd{height:30px;display:flex;align-items:center;justify-content:center;font-size:.75rem;cursor:pointer;border:1px solid transparent;transition:all .18s;color:var(--t2);border-radius:2px}
+.cd.empty,.cd.past{color:var(--t3);cursor:default;pointer-events:none}
+.cd.reserved{background:rgba(200,168,0,.14);border-color:rgba(200,168,0,.32);color:#C8A800;font-weight:600}
+[data-theme=light] .cd.reserved{background:rgba(160,120,0,.1);border-color:rgba(160,120,0,.28);color:#6E5200}
+.cd.avail:hover{border-color:var(--gold);color:var(--gold);background:var(--gdim)}
+.cd.sel{background:var(--gold);color:#0D0D0D;border-color:var(--gold);font-weight:600}
+.cd.tod{border-color:var(--gold);color:var(--gold)}
+.cd.tod.sel{background:var(--gold);color:#0D0D0D}
+.twrap{margin-top:12px}
+.thdr{font-size:.62rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:7px}
+.tgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:5px}
+.ts{padding:6px 3px;text-align:center;font-size:.73rem;cursor:pointer;border:1px solid var(--b);color:var(--t2);background:var(--bg2);transition:all .18s}
+.ts:hover{border-color:var(--gold);color:var(--gold);background:var(--gdim)}
+.ts.sel{background:var(--gold);color:#0D0D0D;border-color:var(--gold);font-weight:600}
+.ts.taken{background:rgba(200,168,0,.12);border-color:rgba(200,168,0,.28);color:#C8A800;cursor:not-allowed;pointer-events:none;font-weight:600}
+[data-theme=light] .ts.taken{background:rgba(160,120,0,.09);border-color:rgba(160,120,0,.24);color:#6E5200}
+.cal-legend{display:flex;gap:14px;flex-wrap:wrap;margin-top:9px}
+.cleg{display:flex;align-items:center;gap:5px;font-size:.68rem;color:var(--t2)}
+.cleg-dot{width:10px;height:10px;border-radius:1px}
+.cleg-avail{background:var(--bg2);border:1px solid var(--b)}
+.cleg-res{background:rgba(200,168,0,.18);border:1px solid rgba(200,168,0,.35)}
+.cleg-sel{background:var(--gold)}
+
+/* FOOTER */
+footer{background:var(--bg2);border-top:1px solid var(--b);transition:background .35s,border-color .35s}
+.foot-m{max-width:1240px;margin:0 auto;padding:60px 5% 40px;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:44px}
+.flogo{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.2rem;letter-spacing:.06em;color:var(--t1);margin-bottom:12px;transition:color .35s}
+.flogo b{color:var(--gold)}
+.fabout{font-size:.8rem;font-weight:300;color:var(--t2);line-height:1.8;transition:color .35s}
+.fct{font-size:.65rem;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+.fl{list-style:none;display:flex;flex-direction:column;gap:8px}
+.fl a{font-size:.8rem;font-weight:300;color:var(--t2);transition:color .2s}
+.fl a:hover{color:var(--gold)}
+.foot-b{max-width:1240px;margin:0 auto;padding:18px 5%;border-top:1px solid var(--b);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.fcopy{font-size:.73rem;color:var(--t3);transition:color .35s}
+.fcopy b{color:var(--gold);font-weight:500}
+
+/* WHATSAPP */
+.wa{position:fixed;bottom:28px;right:28px;z-index:998;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.4);cursor:pointer;transition:transform .3s,box-shadow .3s}
+.wa:hover{transform:scale(1.1) translateY(-3px);box-shadow:0 8px 28px rgba(37,211,102,.5)}
+.wap{position:absolute;inset:0;border-radius:50%;background:#25D366;animation:wap 2.5s infinite}
+@keyframes wap{0%{transform:scale(1);opacity:.6}70%{transform:scale(1.55);opacity:0}100%{transform:scale(1.55);opacity:0}}
+.watt{position:absolute;right:66px;top:50%;transform:translateY(-50%);background:var(--bg3);border:1px solid var(--b);padding:6px 11px;font-size:.7rem;font-weight:500;color:var(--t1);white-space:nowrap;pointer-events:none;opacity:0;transition:opacity .25s}
+.wa:hover .watt{opacity:1}
+
+/* REVEAL */
+.rv{opacity:0;transform:translateY(32px);transition:opacity .7s ease,transform .7s ease}
+.rv.up{opacity:1;transform:none}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
+
+/* RESPONSIVE */
+@media(max-width:1040px){
+  .sgrid{grid-template-columns:repeat(2,1fr)}
+  .ag,.cg,.contg{grid-template-columns:1fr;gap:44px}
+  .aim,.cimg{max-width:480px}
+  .slide{grid-template-columns:1fr}
+  .sl-r{display:none}
+  .sl-l{padding:110px 6% 80px;grid-column:1}
+  .sl-l::after{display:none}
+  .foot-m{grid-template-columns:1fr 1fr;gap:32px}
+}
+@media(max-width:768px){
+  .nav-ul,.btn-cta{display:none}
+  .hbg{display:flex}
+  .sec,.sec-in{padding-left:5%;padding-right:5%}
+  .sec{padding-top:64px;padding-bottom:64px}
+  .sgrid,.pgrid{grid-template-columns:1fr}
+  .ps:not(:last-child)::after{display:none}
+  .stats-in{grid-template-columns:1fr 1fr}
+  .stat:nth-child(2){border-right:none}
+  .fr{grid-template-columns:1fr}
+  .fbox{padding:26px 20px}
+  .foot-m{grid-template-columns:1fr;gap:26px}
+  .cwm{display:none}
+  .tgrid{grid-template-columns:repeat(3,1fr)}
+  .contg{gap:40px}
+}
+@media(max-width:480px){
+  .vals{grid-template-columns:1fr}
+  .sl-h{font-size:2.2rem}
+  .tgrid{grid-template-columns:repeat(2,1fr)}
+}
+</style>
 </head>
 <body>
 
+<!-- NAV -->
 <nav id="nav">
   <div class="nav-in">
-    <a href="#" class="logo">
+    <a href="#hero" class="logo">
       <div class="logo-sq">B</div>
       <div class="logo-nm">Belaw<b> Ec</b></div>
     </a>
     <ul class="nav-ul">
       <li><a href="#nosotros">Nosotros</a></li>
       <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#compliance">Compliance</a></li>
+      <li><a href="#proceso">Proceso</a></li>
       <li><a href="#contacto">Contacto</a></li>
     </ul>
     <div class="nav-r">
       <button class="btn-th" id="thBtn" aria-label="Cambiar tema">☀</button>
-      <button class="btn-cta" onclick="openPlansModal()">Planes</button>
-      <a href="/login" class="btn-cta">Ingresar</a>
+      <a href="#contacto" class="btn-cta">Solicitar consulta</a>
+      <button class="hbg" id="hbg" aria-label="Menú"><span></span><span></span><span></span></button>
     </div>
   </div>
 </nav>
+<div class="mob" id="mob">
+  <a href="#nosotros" onclick="cm()">Nosotros</a>
+  <a href="#servicios" onclick="cm()">Servicios</a>
+  <a href="#compliance" onclick="cm()">Compliance</a>
+  <a href="#proceso" onclick="cm()">Proceso</a>
+  <a href="#contacto" onclick="cm()">Agendar consulta</a>
+</div>
 
+<!-- HERO SLIDER -->
 <section id="hero">
-  <div class="hero-content">
-    <div class="hero-tag">Solución legal integral</div>
-    <h1>Infraestructura legal <em>profesional</em> para abogados independientes</h1>
-    <p class="hero-desc">Acceso a herramientas, especialistas y comunidad legal. Gestiona tus casos, consultas y clientes en un solo lugar.</p>
-    <div class="hero-btns">
-      <button class="bp" onclick="openPlansModal()">Ver Planes</button>
-      <button class="bp" onclick="document.getElementById('contacto').scrollIntoView({behavior:'smooth'})" style="background:transparent;border:1px solid var(--b);color:var(--t2)">Consultar</button>
+  <div class="slides" id="SL">
+
+    <!-- SLIDE 1 - reemplazar src por: img/banner1.jpg -->
+    <div class="slide on" id="sl0">
+      <div class="sl-l">
+        <div class="sl-tag">Derecho Empresarial · Ecuador</div>
+        <h1 class="sl-h">Protegemos el<br><em>futuro legal</em><br>de su empresa</h1>
+        <p class="sl-p">Asesoría jurídica especializada para compañías ecuatorianas. Más de 15 años construyendo blindajes legales que permiten crecer con seguridad.</p>
+        <div class="sl-btns">
+          <a href="#contacto" class="bp">Consulta gratuita →</a>
+          <a href="#servicios" class="bo">Ver servicios</a>
+        </div>
+      </div>
+      <div class="sl-r">
+        <img class="sl-img" src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=900&q=80" alt="Derecho empresarial Ecuador">
+        <!-- PRODUCCIÓN: <img class="sl-img" src="img/banner1.jpg" alt="..."> -->
+        <div class="sl-scrim"></div>
+      </div>
     </div>
+
+    <!-- SLIDE 2 - reemplazar src por: img/banner2.jpg -->
+    <div class="slide" id="sl1">
+      <div class="sl-l">
+        <div class="sl-tag">Compliance · Protección de Datos</div>
+        <h1 class="sl-h">Cumplimiento<br><em>normativo</em><br>sin fricciones</h1>
+        <p class="sl-p">Programas de compliance y protección de datos conforme a la LOPDP ecuatoriana. Su empresa lista para auditarse en cualquier momento.</p>
+        <div class="sl-btns">
+          <a href="#compliance" class="bp">Conocer más →</a>
+          <a href="#contacto" class="bo">Solicitar asesoría</a>
+        </div>
+      </div>
+      <div class="sl-r">
+        <img class="sl-img" src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=900&q=80" alt="Compliance corporativo">
+        <!-- PRODUCCIÓN: <img class="sl-img" src="img/banner2.jpg" alt="..."> -->
+        <div class="sl-scrim"></div>
+      </div>
+    </div>
+
+    <!-- SLIDE 3 - reemplazar src por: img/banner3.jpg -->
+    <div class="slide" id="sl2">
+      <div class="sl-l">
+        <div class="sl-tag">Constitución · Contratos · Litigios</div>
+        <h1 class="sl-h">Asesoría legal<br><em>integral</em> en cada<br>decisión de negocio</h1>
+        <p class="sl-p">Desde la constitución de su compañía hasta la resolución de disputas. Belaw Ec, su aliado jurídico estratégico en cada etapa.</p>
+        <div class="sl-btns">
+          <a href="#servicios" class="bp">Ver todos los servicios →</a>
+          <a href="#nosotros" class="bo">Conocer la firma</a>
+        </div>
+      </div>
+      <div class="sl-r">
+        <img class="sl-img" src="https://images.unsplash.com/photo-1568992688065-536aad8a12f6?w=900&q=80" alt="Firma legal Guayaquil">
+        <!-- PRODUCCIÓN: <img class="sl-img" src="img/banner3.jpg" alt="..."> -->
+        <div class="sl-scrim"></div>
+      </div>
+    </div>
+  </div>
+  <div class="sl-dots" id="dots"></div>
+  <div class="sl-arrs">
+    <button class="sarr" onclick="sP()" aria-label="Anterior">←</button>
+    <button class="sarr" onclick="sN()" aria-label="Siguiente">→</button>
   </div>
 </section>
 
+<!-- STATS -->
+<div class="stats">
+  <div class="stats-in">
+    <div class="stat rv"><div class="stat-n">15+</div><div class="stat-l">Años de experiencia</div></div>
+    <div class="stat rv d1"><div class="stat-n">200+</div><div class="stat-l">Empresas asesoradas</div></div>
+    <div class="stat rv d2"><div class="stat-n">98%</div><div class="stat-l">Clientes satisfechos</div></div>
+    <div class="stat rv d3"><div class="stat-n">9</div><div class="stat-l">Áreas de práctica</div></div>
+  </div>
+</div>
+
+<!-- NOSOTROS -->
 <section class="sec" id="nosotros">
   <div class="ag">
-    <div class="aim">
-      <img class="ai" src="/img/equipo.avif" alt="Equipo Belaw">
+    <div class="aim rv">
+      <!-- PRODUCCIÓN: <img class="ai" src="img/equipo.jpg" alt="Equipo Belaw Ec"> -->
+      <img class="ai" src="https://images.unsplash.com/photo-1521791055366-0d553872952f?w=700&q=80" alt="Equipo Belaw Ec Guayaquil">
       <div class="ab"><div class="ab-n">15+</div><div class="ab-l">Años en Ecuador</div></div>
     </div>
-    <div>
+    <div class="rv d1">
       <div class="ey">Quiénes somos</div>
-      <h2 class="sh">Firma legal <em>especializada</em> en derecho empresarial</h2>
+      <h2 class="sh">Firma legal <em>especializada</em><br>en derecho empresarial</h2>
       <div class="abody">
-        <p>Belaw Ec es un equipo de abogados especializados en derecho corporativo, laboral, LOPDP y litigios. Durante 15+ años, hemos asesorado a cientos de empresas ecuatorianas en decisiones legales estratégicas.</p>
-        <p>Nuestra misión: democratizar el acceso a asesoría legal de calidad para abogados independientes mediante una plataforma integral.</p>
+        <p>Belaw Ec asesora exclusivamente a personas jurídicas en Ecuador. Combinamos rigor técnico con visión estratégica para proteger los intereses de su compañía.</p>
+        <p>Soluciones a medida que mitigan riesgos y aseguran el cumplimiento normativo en un entorno regulatorio en constante cambio.</p>
+      </div>
+      <div class="vals">
+        <div class="val"><div class="vi">🔒</div><div><div class="vn">Confidencialidad</div><div class="vd">Reserva profesional absoluta</div></div></div>
+        <div class="val"><div class="vi">⚡</div><div><div class="vn">Agilidad</div><div class="vd">Respuesta en menos de 24h</div></div></div>
+        <div class="val"><div class="vi">🎯</div><div><div class="vn">Precisión</div><div class="vd">Análisis jurídico sin ambigüedades</div></div></div>
+        <div class="val"><div class="vi">🤝</div><div><div class="vn">Compromiso</div><div class="vd">Aliados estratégicos a largo plazo</div></div></div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="sbg" id="servicios">
-  <div class="sec">
-    <div class="ey">Áreas de práctica</div>
-    <h2 class="sh">Servicios legales <em>empresariales</em></h2>
-    <div class="sgrid">
-      <div class="sc" onclick="selectService('Constitución de Compañías')"><img class="sci" src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=600&q=75" alt="Constitución"><div class="scb"><div class="scn">01</div><div class="scname">Constitución de Compañías</div><p class="scd">S.A., Cía. Ltda., fusiones y escisiones bajo normativa ecuatoriana.</p><span class="sctag">Societario</span></div></div>
-      <div class="sc" onclick="selectService('Compliance Corporativo')"><img class="sci" src="https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=600&q=75" alt="Compliance"><div class="scb"><div class="scn">02</div><div class="scname">Compliance Corporativo</div><p class="scd">Programas de cumplimiento, códigos de ética, políticas anticorrupción.</p><span class="sctag">Compliance</span></div></div>
-      <div class="sc" onclick="selectService('Protección de Datos (LOPDP)')"><img class="sci" src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=600&q=75" alt="Datos"><div class="scb"><div class="scn">03</div><div class="scname">Protección de Datos (LOPDP)</div><p class="scd">Adecuación a LOPDP, políticas de privacidad, derechos ARCO.</p><span class="sctag">Data Privacy</span></div></div>
-      <div class="sc" onclick="selectService('Contratos Comerciales')"><img class="sci" src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600&q=75" alt="Contratos"><div class="scb"><div class="scn">04</div><div class="scname">Contratos Comerciales</div><p class="scd">Redacción y negociación de contratos comerciales y NDA.</p><span class="sctag">Contractual</span></div></div>
-      <div class="sc" onclick="selectService('Derecho Laboral')"><img class="sci" src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=600&q=75" alt="Laboral"><div class="scb"><div class="scn">05</div><div class="scname">Derecho Laboral</div><p class="scd">Contratos, reglamentos internos, desvinculaciones, IESS.</p><span class="sctag">Laboral</span></div></div>
-      <div class="sc" onclick="selectService('Litigios y Arbitraje')"><img class="sci" src="https://images.unsplash.com/photo-1589994965851-a8f479c573a9?w=600&q=75" alt="Litigios"><div class="scb"><div class="scn">06</div><div class="scname">Litigios y Arbitraje</div><p class="scd">Representación judicial y arbitraje ante Cámara de Comercio.</p><span class="sctag">Litigios</span></div></div>
-      <div class="sc" onclick="selectService('Derecho Tributario')"><img class="sci" src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=600&q=75" alt="Tributario"><div class="scb"><div class="scn">07</div><div class="scname">Derecho Tributario</div><p class="scd">Planificación fiscal, consultas SRI, impugnaciones.</p><span class="sctag">Tributario</span></div></div>
-      <div class="sc" onclick="selectService('Derecho Inmobiliario')"><img class="sci" src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&q=75" alt="Inmobiliario"><div class="scb"><div class="scn">08</div><div class="scname">Derecho Inmobiliario</div><p class="scd">Due diligence, compraventa, arrendamiento comercial.</p><span class="sctag">Inmobiliario</span></div></div>
-      <div class="sc" onclick="selectService('Propiedad Intelectual')"><img class="sci" src="https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=600&q=75" alt="PI"><div class="scb"><div class="scn">09</div><div class="scname">Propiedad Intelectual</div><p class="scd">Marcas en SENADI, patentes, derechos de autor.</p><span class="sctag">PI & Tech</span></div></div>
+<hr class="div">
+
+<!-- SERVICIOS -->
+<section class="secf sbg" id="servicios">
+  <div class="sec-in" style="padding-top:90px;padding-bottom:90px">
+    <div class="shdr">
+      <div class="rv"><div class="ey">Áreas de práctica</div><h2 class="sh">Servicios legales <em>empresariales</em></h2></div>
+      <p class="sp rv d1" style="max-width:340px;text-align:right">Cobertura jurídica integral para compañías ecuatorianas en cada etapa.</p>
+    </div>
+    <div class="sgrid rv">
+      <!-- servicio1.jpg --> <div class="sc"><img class="sci" src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=600&q=75" alt="Constitución compañías"><div class="scb"><div class="scn">01</div><div class="scname">Constitución de Compañías</div><p class="scd">S.A., Cía. Ltda., fusiones y escisiones bajo la Ley de Compañías y la Superintendencia ecuatoriana.</p><span class="sctag">Societario</span></div></div>
+      <!-- servicio2.jpg --> <div class="sc"><img class="sci" src="https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=600&q=75" alt="Compliance"><div class="scb"><div class="scn">02</div><div class="scname">Compliance Corporativo</div><p class="scd">Programas de cumplimiento, códigos de ética, políticas anticorrupción y gestión de riesgos legales.</p><span class="sctag">Compliance</span></div></div>
+      <!-- servicio3.jpg --> <div class="sc"><img class="sci" src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=600&q=75" alt="Datos LOPDP"><div class="scb"><div class="scn">03</div><div class="scname">Protección de Datos (LOPDP)</div><p class="scd">Adecuación a la LOPDP, políticas de privacidad, derechos ARCO y contratos de tratamiento.</p><span class="sctag">Data Privacy</span></div></div>
+      <!-- servicio4.jpg --> <div class="sc"><img class="sci" src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600&q=75" alt="Contratos"><div class="scb"><div class="scn">04</div><div class="scname">Contratos Comerciales</div><p class="scd">Redacción y negociación de contratos de servicios, distribución, franquicias, joint ventures y NDA.</p><span class="sctag">Contractual</span></div></div>
+      <!-- servicio5.jpg --> <div class="sc"><img class="sci" src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=600&q=75" alt="Laboral"><div class="scb"><div class="scn">05</div><div class="scname">Derecho Laboral</div><p class="scd">Contratos, reglamentos internos, desvinculaciones y defensa ante el Ministerio de Trabajo e IESS.</p><span class="sctag">Laboral</span></div></div>
+      <!-- servicio6.jpg --> <div class="sc"><img class="sci" src="https://images.unsplash.com/photo-1589994965851-a8f479c573a9?w=600&q=75" alt="Litigios"><div class="scb"><div class="scn">06</div><div class="scname">Litigios y Arbitraje</div><p class="scd">Representación judicial y arbitraje ante la Cámara de Comercio. Defensa estratégica en cualquier instancia.</p><span class="sctag">Litigios</span></div></div>
+      <!-- servicio7.jpg --> <div class="sc"><img class="sci" src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=600&q=75" alt="Tributario"><div class="scb"><div class="scn">07</div><div class="scname">Derecho Tributario</div><p class="scd">Planificación fiscal, consultas al SRI, impugnaciones y renta corporativa para compañías ecuatorianas.</p><span class="sctag">Tributario</span></div></div>
+      <!-- servicio8.jpg --> <div class="sc"><img class="sci" src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&q=75" alt="Inmobiliario"><div class="scb"><div class="scn">08</div><div class="scname">Derecho Inmobiliario</div><p class="scd">Due diligence, compraventa y arrendamiento comercial, propiedad horizontal y proyectos constructivos.</p><span class="sctag">Inmobiliario</span></div></div>
+      <!-- servicio9.jpg --> <div class="sc"><img class="sci" src="https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=600&q=75" alt="PI"><div class="scb"><div class="scn">09</div><div class="scname">Propiedad Intelectual</div><p class="scd">Marcas en SENADI, patentes, derechos de autor y estrategias de PI para empresas tecnológicas.</p><span class="sctag">PI & Tech</span></div></div>
     </div>
   </div>
 </section>
 
-<section class="sec" id="contacto" style="text-align:center">
-  <div class="ey" style="justify-content:center">Contacto</div>
-  <h2 class="sh">Cuéntanos tu caso</h2>
-  <p class="sp" style="margin:20px auto 40px;max-width:600px">Completa el formulario y nos pondremos en contacto en menos de 24 horas hábiles.</p>
-  <a href="/login" class="btn-cta">Acceder al Dashboard</a>
+<hr class="div">
+
+<!-- COMPLIANCE -->
+<section class="secf cbg" id="compliance" style="position:relative;overflow:hidden">
+  <div class="sec-in" style="padding-top:90px;padding-bottom:90px">
+    <div class="cwm">COMPLIANCE</div>
+    <div class="cg">
+      <div class="rv">
+        <div class="ey">Especialización</div>
+        <h2 class="sh">Compliance &amp;<br><em>Protección de Datos</em><br>en Ecuador</h2>
+        <p class="sp">Ayudamos a empresas ecuatorianas a cumplir la LOPDP e implementar programas sólidos de gestión de riesgos normativos.</p>
+        <div class="csteps">
+          <div class="cs"><div class="csn">I</div><div><h4>Diagnóstico</h4><p>Evaluamos su situación frente a la LOPDP y estándares GDPR.</p></div></div>
+          <div class="cs"><div class="csn">II</div><div><h4>Diseño del Programa</h4><p>Políticas y controles adaptados a los riesgos reales de su organización.</p></div></div>
+          <div class="cs"><div class="csn">III</div><div><h4>Implementación</h4><p>Acompañamos la ejecución y capacitamos a su equipo.</p></div></div>
+          <div class="cs"><div class="csn">IV</div><div><h4>Monitoreo Continuo</h4><p>Revisiones periódicas y actualización ante cambios normativos.</p></div></div>
+        </div>
+        <div class="ctags">
+          <span class="ctag">LOPDP Ecuador</span><span class="ctag">GDPR</span><span class="ctag">ISO 27001</span><span class="ctag">UAFE</span><span class="ctag">SIPLAFT</span><span class="ctag">Anti-Lavado</span>
+        </div>
+      </div>
+      <div class="rv d2">
+        <!-- PRODUCCIÓN: <img class="cimg" src="img/compliance.jpg" alt="..."> -->
+        <img class="cimg" src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=700&q=80" alt="Reunión compliance Ecuador">
+      </div>
+    </div>
+  </div>
 </section>
 
-<footer class="footer">
-  <div class="footer-in">
+<hr class="div">
+
+<!-- PROCESO -->
+<section class="secf pbg" id="proceso">
+  <div class="sec-in" style="padding-top:90px;padding-bottom:90px">
+    <div class="rv" style="text-align:center;max-width:500px;margin:0 auto">
+      <div class="ey" style="justify-content:center">Cómo trabajamos</div>
+      <h2 class="sh">Su proceso con <em>Belaw Ec</em></h2>
+    </div>
+    <div class="pgrid rv">
+      <div class="ps"><div class="pn">01</div><div class="pname">Contacto</div><p class="pd">Complete el formulario o escríbanos. Respuesta en menos de 24 horas hábiles.</p></div>
+      <div class="ps"><div class="pn">02</div><div class="pname">Consulta gratuita</div><p class="pd">Primera reunión sin costo para entender su situación y definir el alcance.</p></div>
+      <div class="ps"><div class="pn">03</div><div class="pname">Propuesta</div><p class="pd">Honorarios claros y transparentes, ajustados a sus necesidades específicas.</p></div>
+      <div class="ps"><div class="pn">04</div><div class="pname">Ejecución</div><p class="pd">Trabajo con reportes periódicos y contacto directo con su abogado asignado.</p></div>
+    </div>
+  </div>
+</section>
+
+<hr class="div">
+
+<!-- CONTACTO -->
+<section class="sec contbg" id="contacto" style="padding-top:90px;padding-bottom:90px">
+  <div class="contg">
+    <div class="cinfo rv">
+      <div class="ey">Agendar consulta</div>
+      <h2 class="sh">Hablemos sobre<br>su <em>necesidad legal</em></h2>
+      <p class="sp">Elija el día y hora que le conviene. Nuestros abogados confirmarán su cita en 24 horas.</p>
+      <div class="cdet"><div class="cico">📍</div><div><div class="cdl">Dirección</div><div class="cdv">Av. Francisco de Orellana, Guayaquil</div></div></div>
+      <div class="cdet"><div class="cico">☎</div><div><div class="cdl">Teléfono</div><div class="cdv">+593 4 XXX-XXXX</div></div></div>
+      <div class="cdet"><div class="cico">✉</div><div><div class="cdl">Correo</div><div class="cdv">info@belawec.com</div></div></div>
+      <div class="cdet"><div class="cico">🕐</div><div><div class="cdl">Horario</div><div class="cdv">Lunes a Viernes · 08:00 – 17:30</div></div></div>
+    </div>
+    <div class="rv d1">
+      <div class="fbox">
+        <div class="ftt">Solicitud de consulta</div>
+        <div class="fsub">Sus datos son confidenciales y protegidos bajo la LOPDP Ecuador.</div>
+        <div id="fBody">
+          <div class="fr">
+            <div class="fg"><label>Nombre *</label><input type="text" id="fn" placeholder="Juan Pérez"></div>
+            <div class="fg"><label>Cargo</label><input type="text" id="fc" placeholder="Gerente General"></div>
+          </div>
+          <div class="fr">
+            <div class="fg"><label>Empresa *</label><input type="text" id="fe" placeholder="Nombre de su compañía"></div>
+            <div class="fg"><label>RUC</label><input type="text" id="fr2" placeholder="0001234567001"></div>
+          </div>
+          <div class="fr">
+            <div class="fg"><label>Correo *</label><input type="email" id="fem" placeholder="correo@empresa.com"></div>
+            <div class="fg"><label>Teléfono / WhatsApp *</label><input type="tel" id="ft" placeholder="+593 99 XXX XXXX"></div>
+          </div>
+          <div class="fr full">
+            <div class="fg"><label>Servicio de interés *</label>
+              <select id="fserv">
+                <option value="">-- Seleccione --</option>
+                <option>Compliance Corporativo</option>
+                <option>Protección de Datos (LOPDP)</option>
+                <option>Constitución de Compañías</option>
+                <option>Contratos Comerciales</option>
+                <option>Derecho Laboral</option>
+                <option>Derecho Tributario</option>
+                <option>Litigios y Arbitraje</option>
+                <option>Derecho Inmobiliario</option>
+                <option>Propiedad Intelectual</option>
+                <option>Otro</option>
+              </select>
+            </div>
+          </div>
+          <div class="fr full">
+            <div class="fg"><label>Descripción breve</label><textarea id="fm" placeholder="Cuéntenos brevemente su situación legal..."></textarea></div>
+          </div>
+          <!-- CALENDARIO -->
+          <div class="calwrap">
+            <div class="callbl">Seleccione fecha y hora para su consulta *</div>
+            <div class="calbox">
+              <div class="calnav">
+                <button class="calarr" onclick="calMove(-1)">&#8592;</button>
+                <div class="calmo" id="calTit"></div>
+                <button class="calarr" onclick="calMove(1)">&#8594;</button>
+              </div>
+              <div class="caldow">
+                <span>Dom</span><span>Lun</span><span>Mar</span><span>Mié</span><span>Jue</span><span>Vie</span><span>Sáb</span>
+              </div>
+              <div class="caldays" id="calDays"></div>
+              <div class="cal-legend">
+                <div class="cleg"><div class="cleg-dot cleg-avail"></div>Disponible</div>
+                <div class="cleg"><div class="cleg-dot cleg-res"></div>Con citas agendadas</div>
+                <div class="cleg"><div class="cleg-dot cleg-sel"></div>Seleccionado</div>
+              </div>
+            </div>
+            <div class="twrap" id="tWrap" style="display:none">
+              <div class="thdr" id="tHdr">Horarios disponibles</div>
+              <div class="tgrid" id="tGrid"></div>
+            </div>
+          </div>
+          <div id="selSum" style="margin-top:9px;font-size:.76rem;color:var(--gold);font-weight:500;min-height:16px"></div>
+          <div class="fr full" style="margin-top:12px">
+            <div class="fg"><label>Modalidad preferida</label>
+              <select id="fmod">
+                <option>Videollamada (Zoom / Meet)</option>
+                <option>Llamada telefónica</option>
+                <option>WhatsApp</option>
+                <option>Visita en oficina</option>
+              </select>
+            </div>
+          </div>
+          <button class="fsub-btn" onclick="submitForm()">Enviar solicitud →</button>
+          <p class="fnote">🔒 Información confidencial · Protegida bajo la LOPDP Ecuador</p>
+        </div>
+        <div class="fok" id="fOk">
+          <div class="fok-i">✓</div>
+          <h4>¡Solicitud enviada!</h4>
+          <p>Un abogado de Belaw Ec le confirmará su cita dentro de las próximas 24 horas hábiles.<br>Revise también su correo electrónico.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-m">
     <div>
-      <div style="font-weight:600;color:var(--t1);margin-bottom:20px">Belaw Ec</div>
-      <p style="font-size:.8rem;color:var(--t2);line-height:1.6">Asesoría legal empresarial especializada en derecho corporativo, LOPDP, laboral y litigios para empresas ecuatorianas.</p>
+      <div class="flogo">Belaw<b> Ec</b></div>
+      <p class="fabout">Firma jurídica especializada en derecho empresarial ecuatoriano. Asesoramos a personas jurídicas con excelencia, ética y compromiso normativo desde Guayaquil, Ecuador.</p>
     </div>
     <div>
-      <div class="footer-t">Empresa</div>
-      <ul class="footer-l">
-        <li><a href="#nosotros">Nosotros</a></li>
-        <li><a href="#servicios">Servicios</a></li>
+      <div class="fct">Servicios</div>
+      <ul class="fl">
+        <li><a href="#servicios">Compliance</a></li>
+        <li><a href="#compliance">Protección de Datos</a></li>
+        <li><a href="#servicios">Contratos</a></li>
+        <li><a href="#servicios">Derecho Laboral</a></li>
+        <li><a href="#servicios">Tributario</a></li>
+        <li><a href="#servicios">Litigios</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="fct">Firma</div>
+      <ul class="fl">
+        <li><a href="#nosotros">Quiénes somos</a></li>
+        <li><a href="#proceso">Cómo trabajamos</a></li>
         <li><a href="#contacto">Contacto</a></li>
       </ul>
     </div>
     <div>
-      <div class="footer-t">Legal</div>
-      <ul class="footer-l">
-        <li><a href="#">Términos</a></li>
-        <li><a href="#">Privacidad</a></li>
+      <div class="fct">Legal</div>
+      <ul class="fl">
+        <li><a href="#">Política de privacidad</a></li>
+        <li><a href="#">Aviso legal</a></li>
+        <li><a href="#">Términos de uso</a></li>
       </ul>
     </div>
-    <div>
-      <div class="footer-t">Contacto</div>
-      <ul class="footer-l">
-        <li><a href="mailto:gerencia@belaw-ec.com">Email</a></li>
-        <li><a href="#">WhatsApp</a></li>
-      </ul>
-    </div>
+  </div>
+  <div class="foot-b">
+    <p class="fcopy">© 2025 <b>Belaw Ec</b> · Todos los derechos reservados</p>
+    <p class="fcopy">Guayaquil, Ecuador · info@belawec.com</p>
   </div>
 </footer>
 
-<div class="modal-overlay" id="plansModal">
-  <div class="modal">
-    <button class="modal-close" onclick="closePlansModal()">✕</button>
-    <div class="modal-head">
-      <h2>Planes de Suscripción</h2>
-      <p>Infraestructura legal profesional para abogados independientes</p>
-    </div>
-    <div class="modal-body">
-      <div class="mgrid">
-        <div class="mcard">
-          <div class="mcard-name">Starter</div>
-          <div class="mcard-price">$45<span style="font-size:.5em">/mes</span></div>
-          <ul class="mcard-feats">
-            <li>Correo corporativo</li>
-            <li>5 plantillas básicas</li>
-            <li>CRM de casos</li>
-            <li>Co-counsel (30%)</li>
-            <li>Boletín semanal</li>
-          </ul>
-          <a href="/login" class="btn-cta" style="display:block;text-align:center;width:100%">Comenzar</a>
-        </div>
-        <div class="mcard featured">
-          <div style="display:inline-block;background:var(--gold);color:#0D0D0D;padding:4px 12px;font-size:.62rem;font-weight:600;border-radius:12px;margin-bottom:12px">MÁS POPULAR</div>
-          <div class="mcard-name">Professional</div>
-          <div class="mcard-price">$90<span style="font-size:.5em">/mes</span></div>
-          <ul class="mcard-feats">
-            <li>Correo corporativo</li>
-            <li>20+ plantillas + copilot</li>
-            <li>CRM completo</li>
-            <li>Office hours mensuales</li>
-            <li>Co-counsel (25%)</li>
-          </ul>
-          <a href="/login" class="btn-cta" style="display:block;text-align:center;width:100%">Comenzar</a>
-        </div>
-        <div class="mcard">
-          <div class="mcard-name">Enterprise</div>
-          <div class="mcard-price">$150<span style="font-size:.5em">/mes</span></div>
-          <ul class="mcard-feats">
-            <li>Correo corporativo</li>
-            <li>Plantillas ilimitadas</li>
-            <li>CRM + API</li>
-            <li>Office hours + privadas</li>
-            <li>Co-counsel (20%)</li>
-          </ul>
-          <a href="/login" class="btn-cta" style="display:block;text-align:center;width:100%">Comenzar</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+<!-- WHATSAPP -->
+<a class="wa" href="https://wa.me/593900000000?text=Hola%20Belaw%20Ec%2C%20necesito%20informaci%C3%B3n." target="_blank" rel="noopener" aria-label="WhatsApp">
+  <div class="wap"></div>
+  <svg viewBox="0 0 24 24" fill="white" width="26" height="26" style="position:relative;z-index:1">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+  <div class="watt">Escríbanos por WhatsApp</div>
+</a>
 
 <script>
-  const thBtn = document.getElementById('thBtn');
-  thBtn.addEventListener('click', function() {
-    const html = document.documentElement;
-    html.dataset.theme = html.dataset.theme === 'dark' ? 'light' : 'dark';
-    localStorage.setItem('theme', html.dataset.theme);
-  });
-  const saved = localStorage.getItem('theme') || 'dark';
-  document.documentElement.dataset.theme = saved;
-  function openPlansModal(){document.getElementById('plansModal').classList.add('on')}
-  function closePlansModal(){document.getElementById('plansModal').classList.remove('on')}
-  document.getElementById('plansModal').addEventListener('click',function(e){if(e.target===this)closePlansModal()});
-  function selectService(n){openPlansModal()}
-  window.addEventListener('load',function(){setTimeout(function(){openPlansModal()},8000)});
-</script>
+/* TEMA */
+const H = document.documentElement;
+const thBtn = document.getElementById('thBtn');
 
+function setTheme(t) {
+  H.setAttribute('data-theme', t);
+  thBtn.textContent = t === 'dark' ? '☀' : '🌙';
+  try { localStorage.setItem('blaw_theme', t); } catch(e){}
+}
+
+// Cargar tema guardado o usar oscuro por defecto
+(function(){
+  let saved = 'dark';
+  try { saved = localStorage.getItem('blaw_theme') || 'dark'; } catch(e){}
+  setTheme(saved);
+})();
+
+thBtn.addEventListener('click', function() {
+  const current = H.getAttribute('data-theme');
+  setTheme(current === 'dark' ? 'light' : 'dark');
+});
+
+/* SLIDER */
+const slides = document.querySelectorAll('.slide');
+const dotsEl = document.getElementById('dots');
+let cur = 0, timer;
+
+slides.forEach(function(_, i) {
+  const d = document.createElement('div');
+  d.className = 'sdot' + (i === 0 ? ' on' : '');
+  d.addEventListener('click', function(){ go(i); });
+  dotsEl.appendChild(d);
+});
+
+function go(n) {
+  slides[cur].classList.remove('on');
+  dotsEl.children[cur].classList.remove('on');
+  cur = ((n % slides.length) + slides.length) % slides.length;
+  slides[cur].classList.add('on');
+  dotsEl.children[cur].classList.add('on');
+  clearInterval(timer);
+  timer = setInterval(sN, 6800);
+}
+function sN() { go(cur + 1); }
+function sP() { go(cur - 1); }
+timer = setInterval(sN, 6800);
+
+/* MENU MOVIL */
+const mob = document.getElementById('mob');
+document.getElementById('hbg').addEventListener('click', function() {
+  mob.classList.toggle('on');
+});
+function cm() { mob.classList.remove('on'); }
+
+/* REVEAL ON SCROLL */
+const ro = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) {
+    if (e.isIntersecting) e.target.classList.add('up');
+  });
+}, { threshold: 0.07, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.rv').forEach(function(el) { ro.observe(el); });
+
+/* CALENDARIO */
+const MN = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+const DN = ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
+const today = new Date(); today.setHours(0,0,0,0);
+
+function addD(d, n) { const r = new Date(d); r.setDate(r.getDate() + n); return r; }
+function dk(d) { return d.getFullYear() + '-' + (d.getMonth()+1) + '-' + d.getDate(); }
+
+const RES = {};
+[addD(today,1), addD(today,2), addD(today,4), addD(today,7), addD(today,9)].forEach(function(d, i) {
+  RES[dk(d)] = [['09:00','10:30'],['14:00','15:30'],['09:00'],['10:30','11:00','14:00'],['09:00','09:30','15:00']][i];
+});
+
+let cY = today.getFullYear(), cM = today.getMonth();
+let selD = null, selT = null;
+
+function buildCal() {
+  document.getElementById('calTit').textContent = MN[cM] + ' ' + cY;
+  const grid = document.getElementById('calDays');
+  grid.innerHTML = '';
+  const first = new Date(cY, cM, 1).getDay();
+  const dim = new Date(cY, cM+1, 0).getDate();
+  for (let i = 0; i < first; i++) {
+    const e = document.createElement('div'); e.className = 'cd empty'; grid.appendChild(e);
+  }
+  for (let d = 1; d <= dim; d++) {
+    const dt = new Date(cY, cM, d);
+    const key = dk(dt);
+    const isWE = dt.getDay() === 0 || dt.getDay() === 6;
+    const isPast = dt < today;
+    const el = document.createElement('div');
+    el.textContent = d;
+    if (isPast || isWE) { el.className = 'cd past'; }
+    else if (RES[key] && RES[key].length > 0) { el.className = 'cd reserved avail'; }
+    else { el.className = 'cd avail'; }
+    if (selD && dk(dt) === dk(selD)) el.classList.add('sel');
+    if (dk(dt) === dk(today) && !isPast) el.classList.add('tod');
+    if (!isPast && !isWE) {
+      el.addEventListener('click', function() { selD = dt; selT = null; buildCal(); buildTimes(key); updSum(); });
+    }
+    grid.appendChild(el);
+  }
+}
+
+const TIMES = [];
+for (let h = 8; h <= 17; h++) {
+  for (let m = 0; m < 60; m += 30) {
+    if (h === 17 && m > 0) break;
+    TIMES.push((h < 10 ? '0' : '') + h + ':' + (m === 0 ? '00' : '30'));
+  }
+}
+
+function buildTimes(key) {
+  const tw = document.getElementById('tWrap');
+  const tg = document.getElementById('tGrid');
+  const th = document.getElementById('tHdr');
+  const taken = RES[key] || [];
+  tw.style.display = 'block';
+  th.textContent = 'Horarios – ' + DN[selD.getDay()] + ' ' + selD.getDate() + ' de ' + MN[selD.getMonth()];
+  tg.innerHTML = '';
+  TIMES.forEach(function(t) {
+    const el = document.createElement('div');
+    el.textContent = t;
+    const isTaken = taken.includes(t);
+    el.className = 'ts' + (isTaken ? ' taken' : '') + (selT === t ? ' sel' : '');
+    if (!isTaken) {
+      el.addEventListener('click', function() { selT = t; buildTimes(key); updSum(); });
+    }
+    tg.appendChild(el);
+  });
+}
+
+function fmtD(d) { return DN[d.getDay()] + ', ' + d.getDate() + ' de ' + MN[d.getMonth()] + ' ' + d.getFullYear(); }
+function updSum() {
+  const s = document.getElementById('selSum');
+  if (selD && selT) s.textContent = '✓ Cita seleccionada: ' + fmtD(selD) + ' a las ' + selT;
+  else if (selD) s.textContent = '✓ ' + fmtD(selD) + ' – seleccione un horario';
+  else s.textContent = '';
+}
+function calMove(n) {
+  cM += n;
+  if (cM > 11) { cM = 0; cY++; }
+  if (cM < 0) { cM = 11; cY--; }
+  buildCal();
+  document.getElementById('tWrap').style.display = 'none';
+}
+buildCal();
+
+/* FORMULARIO */
+function submitForm() {
+  const req = ['fn','fe','fem','ft','fserv'];
+  let ok = true;
+  req.forEach(function(id) {
+    const el = document.getElementById(id);
+    el.style.borderColor = el.value.trim() ? '' : '#C0392B';
+    if (!el.value.trim()) ok = false;
+  });
+  if (!ok) { alert('Por favor complete los campos obligatorios (*)'); return; }
+  if (!selD || !selT) { alert('Por favor seleccione fecha y hora en el calendario'); return; }
+  document.getElementById('fBody').style.display = 'none';
+  document.getElementById('fOk').classList.add('on');
+}
+</script>
 </body>
 </html>

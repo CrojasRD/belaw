@@ -262,9 +262,16 @@ footer{background:var(--bg2);border-top:1px solid var(--b);transition:background
   .ag,.cg,.contg{grid-template-columns:1fr;gap:44px}
   .aim,.cimg{max-width:480px}
   .slide{grid-template-columns:1fr}
-  .sl-r{display:none}
-  .sl-l{padding:110px 6% 80px;grid-column:1}
+  .sl-r{position:absolute;inset:0;z-index:1}
+  .sl-l{position:relative;z-index:2;grid-column:1;background:transparent;padding:130px 6% 70px}
   .sl-l::after{display:none}
+  .sl-tag{color:var(--gold)}
+  .sl-h{color:#F5F2EC}
+  .sl-h em{color:var(--gold2)}
+  .sl-p{color:rgba(245,242,236,.85)}
+  .bo{border-color:rgba(245,242,236,.35);color:rgba(245,242,236,.9)}
+  .bo:hover{border-color:var(--gold);color:var(--gold)}
+  .sl-scrim{background:linear-gradient(180deg,rgba(10,10,10,.25) 0%,rgba(10,10,10,.6) 55%,rgba(10,10,10,.92) 100%)}
   .foot-m{grid-template-columns:1fr 1fr;gap:32px}
 }
 @media(max-width:768px){
@@ -286,6 +293,7 @@ footer{background:var(--bg2);border-top:1px solid var(--b);transition:background
 @media(max-width:480px){
   .vals{grid-template-columns:1fr}
   .sl-h{font-size:2.2rem}
+  .sl-l{padding-top:110px}
   .tgrid{grid-template-columns:repeat(2,1fr)}
 }
 
@@ -337,7 +345,7 @@ footer{background:var(--bg2);border-top:1px solid var(--b);transition:background
       <li><a href="#compliance">Compliance</a></li>
       <li><a href="#proceso">Proceso</a></li>
       <li><a href="#contacto">Contacto</a></li>
-      <li><a href="javascript:void(0)" onclick="openPlansModal()" style="color:var(--gold)">Planes</a></li>
+      <li><a href="suscripciones.html" style="color:var(--gold)">Planes</a></li>
     </ul>
     <div class="nav-r">
       <button class="btn-th" id="thBtn" aria-label="Cambiar tema">☀</button>
@@ -352,57 +360,23 @@ footer{background:var(--bg2);border-top:1px solid var(--b);transition:background
   <a href="#compliance" onclick="cm()">Compliance</a>
   <a href="#proceso" onclick="cm()">Proceso</a>
   <a href="#contacto" onclick="cm()">Agendar consulta</a>
-  <a href="javascript:void(0)" onclick="cm();openPlansModal()">Planes</a>
+  <a href="suscripciones.html">Planes</a>
 </div>
 
 <div class="modal-overlay" id="plansModal">
   <div class="modal">
     <button class="modal-close" onclick="closePlansModal()" aria-label="Cerrar">✕</button>
-    <div class="modal-head">
-      <h2>Planes de Suscripción</h2>
-      <p>Infraestructura legal profesional para abogados independientes</p>
+    <div class="modal-head" style="text-align:center">
+      <h2>Infraestructura legal para abogados independientes</h2>
+      <p>Correo corporativo, plantillas, CRM de casos y red de co-counsel desde $45/mes</p>
     </div>
-    <div class="modal-body">
-      <div class="pgrid">
-        <div class="pcard">
-          <div class="pname">Starter</div>
-          <div class="pprice">$45<span style="font-size:.55em">/mes</span></div>
-          <ul class="pfeat">
-            <li>Correo corporativo</li>
-            <li>5 plantillas básicas</li>
-            <li>CRM de casos</li>
-            <li>Co-counsel (30%)</li>
-            <li>Boletín semanal</li>
-          </ul>
-          <a href="login.html?plan=Starter" class="pbtn">Comenzar</a>
-        </div>
-        <div class="pcard featured">
-          <div class="pbadge">Más popular</div>
-          <div class="pname">Professional</div>
-          <div class="pprice">$90<span style="font-size:.55em">/mes</span></div>
-          <ul class="pfeat">
-            <li>Correo corporativo</li>
-            <li>20+ plantillas + copilot</li>
-            <li>CRM completo</li>
-            <li>Office hours mensuales</li>
-            <li>Co-counsel (25%)</li>
-          </ul>
-          <a href="login.html?plan=Professional" class="pbtn">Comenzar</a>
-        </div>
-        <div class="pcard">
-          <div class="pname">Enterprise</div>
-          <div class="pprice">$150<span style="font-size:.55em">/mes</span></div>
-          <ul class="pfeat">
-            <li>Correo corporativo</li>
-            <li>Plantillas ilimitadas</li>
-            <li>CRM + API</li>
-            <li>Office hours + privadas</li>
-            <li>Co-counsel (20%)</li>
-          </ul>
-          <a href="login.html?plan=Enterprise" class="pbtn">Comenzar</a>
-        </div>
+    <div class="modal-body" style="text-align:center;padding-top:0">
+      <div style="display:flex;justify-content:center;gap:28px;flex-wrap:wrap;margin-bottom:26px;font-size:.8rem;color:var(--t2)">
+        <span>✓ Starter $45</span>
+        <span>✓ Professional $90</span>
+        <span>✓ Enterprise $150</span>
       </div>
-      <div class="modal-more"><a href="suscripciones.html">Ver comparativa completa de planes →</a></div>
+      <a href="suscripciones.html" class="pbtn" style="display:inline-block;width:auto;padding:14px 32px">Ver planes y comparativa completa →</a>
     </div>
   </div>
 </div>
@@ -517,15 +491,15 @@ footer{background:var(--bg2);border-top:1px solid var(--b);transition:background
       <p class="sp rv d1" style="max-width:340px;text-align:right">Cobertura jurídica integral para compañías ecuatorianas en cada etapa.</p>
     </div>
     <div class="sgrid rv">
-      <!-- servicio1.jpg --> <div class="sc"><img class="sci" src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=600&q=75" alt="Constitución compañías"><div class="scb"><div class="scn">01</div><div class="scname">Constitución de Compañías</div><p class="scd">S.A., Cía. Ltda., fusiones y escisiones bajo la Ley de Compañías y la Superintendencia ecuatoriana.</p><span class="sctag">Societario</span></div></div>
-      <!-- servicio2.jpg --> <div class="sc"><img class="sci" src="https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=600&q=75" alt="Compliance"><div class="scb"><div class="scn">02</div><div class="scname">Compliance Corporativo</div><p class="scd">Programas de cumplimiento, códigos de ética, políticas anticorrupción y gestión de riesgos legales.</p><span class="sctag">Compliance</span></div></div>
-      <!-- servicio3.jpg --> <div class="sc"><img class="sci" src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=600&q=75" alt="Datos LOPDP"><div class="scb"><div class="scn">03</div><div class="scname">Protección de Datos (LOPDP)</div><p class="scd">Adecuación a la LOPDP, políticas de privacidad, derechos ARCO y contratos de tratamiento.</p><span class="sctag">Data Privacy</span></div></div>
-      <!-- servicio4.jpg --> <div class="sc"><img class="sci" src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600&q=75" alt="Contratos"><div class="scb"><div class="scn">04</div><div class="scname">Contratos Comerciales</div><p class="scd">Redacción y negociación de contratos de servicios, distribución, franquicias, joint ventures y NDA.</p><span class="sctag">Contractual</span></div></div>
-      <!-- servicio5.jpg --> <div class="sc"><img class="sci" src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=600&q=75" alt="Laboral"><div class="scb"><div class="scn">05</div><div class="scname">Derecho Laboral</div><p class="scd">Contratos, reglamentos internos, desvinculaciones y defensa ante el Ministerio de Trabajo e IESS.</p><span class="sctag">Laboral</span></div></div>
-      <!-- servicio6.jpg --> <div class="sc"><img class="sci" src="https://images.unsplash.com/photo-1589994965851-a8f479c573a9?w=600&q=75" alt="Litigios"><div class="scb"><div class="scn">06</div><div class="scname">Litigios y Arbitraje</div><p class="scd">Representación judicial y arbitraje ante la Cámara de Comercio. Defensa estratégica en cualquier instancia.</p><span class="sctag">Litigios</span></div></div>
-      <!-- servicio7.jpg --> <div class="sc"><img class="sci" src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=600&q=75" alt="Tributario"><div class="scb"><div class="scn">07</div><div class="scname">Derecho Tributario</div><p class="scd">Planificación fiscal, consultas al SRI, impugnaciones y renta corporativa para compañías ecuatorianas.</p><span class="sctag">Tributario</span></div></div>
-      <!-- servicio8.jpg --> <div class="sc"><img class="sci" src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&q=75" alt="Inmobiliario"><div class="scb"><div class="scn">08</div><div class="scname">Derecho Inmobiliario</div><p class="scd">Due diligence, compraventa y arrendamiento comercial, propiedad horizontal y proyectos constructivos.</p><span class="sctag">Inmobiliario</span></div></div>
-      <!-- servicio9.jpg --> <div class="sc"><img class="sci" src="https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=600&q=75" alt="PI"><div class="scb"><div class="scn">09</div><div class="scname">Propiedad Intelectual</div><p class="scd">Marcas en SENADI, patentes, derechos de autor y estrategias de PI para empresas tecnológicas.</p><span class="sctag">PI & Tech</span></div></div>
+      <!-- servicio1.jpg --> <div class="sc" onclick="selectService(&apos;Constitución de Compañías&apos;)" style="cursor:pointer"><img class="sci" src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=600&q=75" alt="Constitución compañías"><div class="scb"><div class="scn">01</div><div class="scname">Constitución de Compañías</div><p class="scd">S.A., Cía. Ltda., fusiones y escisiones bajo la Ley de Compañías y la Superintendencia ecuatoriana.</p><span class="sctag">Societario</span></div></div>
+      <!-- servicio2.jpg --> <div class="sc" onclick="selectService(&apos;Compliance Corporativo&apos;)" style="cursor:pointer"><img class="sci" src="https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=600&q=75" alt="Compliance"><div class="scb"><div class="scn">02</div><div class="scname">Compliance Corporativo</div><p class="scd">Programas de cumplimiento, códigos de ética, políticas anticorrupción y gestión de riesgos legales.</p><span class="sctag">Compliance</span></div></div>
+      <!-- servicio3.jpg --> <div class="sc" onclick="selectService(&apos;Protección de Datos (LOPDP)&apos;)" style="cursor:pointer"><img class="sci" src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=600&q=75" alt="Datos LOPDP"><div class="scb"><div class="scn">03</div><div class="scname">Protección de Datos (LOPDP)</div><p class="scd">Adecuación a la LOPDP, políticas de privacidad, derechos ARCO y contratos de tratamiento.</p><span class="sctag">Data Privacy</span></div></div>
+      <!-- servicio4.jpg --> <div class="sc" onclick="selectService(&apos;Contratos Comerciales&apos;)" style="cursor:pointer"><img class="sci" src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600&q=75" alt="Contratos"><div class="scb"><div class="scn">04</div><div class="scname">Contratos Comerciales</div><p class="scd">Redacción y negociación de contratos de servicios, distribución, franquicias, joint ventures y NDA.</p><span class="sctag">Contractual</span></div></div>
+      <!-- servicio5.jpg --> <div class="sc" onclick="selectService(&apos;Derecho Laboral&apos;)" style="cursor:pointer"><img class="sci" src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=600&q=75" alt="Laboral"><div class="scb"><div class="scn">05</div><div class="scname">Derecho Laboral</div><p class="scd">Contratos, reglamentos internos, desvinculaciones y defensa ante el Ministerio de Trabajo e IESS.</p><span class="sctag">Laboral</span></div></div>
+      <!-- servicio6.jpg --> <div class="sc" onclick="selectService(&apos;Litigios y Arbitraje&apos;)" style="cursor:pointer"><img class="sci" src="https://images.unsplash.com/photo-1589994965851-a8f479c573a9?w=600&q=75" alt="Litigios"><div class="scb"><div class="scn">06</div><div class="scname">Litigios y Arbitraje</div><p class="scd">Representación judicial y arbitraje ante la Cámara de Comercio. Defensa estratégica en cualquier instancia.</p><span class="sctag">Litigios</span></div></div>
+      <!-- servicio7.jpg --> <div class="sc" onclick="selectService(&apos;Derecho Tributario&apos;)" style="cursor:pointer"><img class="sci" src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=600&q=75" alt="Tributario"><div class="scb"><div class="scn">07</div><div class="scname">Derecho Tributario</div><p class="scd">Planificación fiscal, consultas al SRI, impugnaciones y renta corporativa para compañías ecuatorianas.</p><span class="sctag">Tributario</span></div></div>
+      <!-- servicio8.jpg --> <div class="sc" onclick="selectService(&apos;Derecho Inmobiliario&apos;)" style="cursor:pointer"><img class="sci" src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&q=75" alt="Inmobiliario"><div class="scb"><div class="scn">08</div><div class="scname">Derecho Inmobiliario</div><p class="scd">Due diligence, compraventa y arrendamiento comercial, propiedad horizontal y proyectos constructivos.</p><span class="sctag">Inmobiliario</span></div></div>
+      <!-- servicio9.jpg --> <div class="sc" onclick="selectService(&apos;Propiedad Intelectual&apos;)" style="cursor:pointer"><img class="sci" src="https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=600&q=75" alt="PI"><div class="scb"><div class="scn">09</div><div class="scname">Propiedad Intelectual</div><p class="scd">Marcas en SENADI, patentes, derechos de autor y estrategias de PI para empresas tecnológicas.</p><span class="sctag">PI & Tech</span></div></div>
     </div>
   </div>
 </section>
@@ -890,6 +864,16 @@ function submitForm() {
   if (!selD || !selT) { alert('Por favor seleccione fecha y hora en el calendario'); return; }
   document.getElementById('fBody').style.display = 'none';
   document.getElementById('fOk').classList.add('on');
+}
+
+/* SELECCIÓN DE SERVICIO */
+function selectService(name) {
+  const sel = document.getElementById('fserv');
+  if (sel) {
+    sel.value = name;
+    sel.style.borderColor = '';
+  }
+  document.getElementById('contacto').scrollIntoView({ behavior: 'smooth' });
 }
 
 /* PLANES MODAL */

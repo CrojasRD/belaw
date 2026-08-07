@@ -288,6 +288,38 @@ footer{background:var(--bg2);border-top:1px solid var(--b);transition:background
   .sl-h{font-size:2.2rem}
   .tgrid{grid-template-columns:repeat(2,1fr)}
 }
+
+/* PLANES MODAL */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(4px);z-index:1000;align-items:center;justify-content:center;padding:20px}
+.modal-overlay.on{display:flex;animation:fadeIn .3s}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.modal{background:var(--bg2);border:1px solid var(--b);border-radius:12px;width:100%;max-width:960px;max-height:88vh;overflow-y:auto;position:relative;animation:slideUp .4s}
+@keyframes slideUp{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}
+.modal-close{position:absolute;top:18px;right:18px;width:38px;height:38px;background:none;border:1px solid var(--b);color:var(--t2);font-size:1.3rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;z-index:10}
+.modal-close:hover{border-color:var(--gold);color:var(--gold)}
+.modal-head{padding:36px 36px 16px}
+.modal-head h2{font-family:'Cormorant Garamond',serif;font-size:1.9rem;color:var(--t1);margin-bottom:8px}
+.modal-head p{font-size:.85rem;color:var(--t2)}
+.modal-body{padding:8px 36px 36px}
+.pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.pcard{background:var(--bgc);border:1px solid var(--b);padding:26px 20px;text-align:center;position:relative;transition:all .3s}
+.pcard:hover{border-color:var(--gold);transform:translateY(-4px)}
+.pcard.featured{border-color:var(--gold);background:var(--gdim)}
+.pbadge{display:inline-block;background:var(--gold);color:#0D0D0D;padding:3px 11px;font-size:.6rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;border-radius:12px;margin-bottom:10px}
+.pname{font-family:'Cormorant Garamond',serif;font-size:1.35rem;color:var(--t1);margin-bottom:6px}
+.pprice{font-size:1.7rem;color:var(--gold);font-weight:600;margin-bottom:14px}
+.pfeat{list-style:none;text-align:left;font-size:.78rem;margin-bottom:20px}
+.pfeat li{padding:6px 0;color:var(--t2);border-bottom:1px solid var(--b)}
+.pfeat li::before{content:'✓';color:var(--gold);font-weight:600;margin-right:6px}
+.pbtn{width:100%;display:block;text-align:center;padding:10px;background:var(--gold);color:#0D0D0D;border:none;font-weight:600;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:background .2s}
+.pbtn:hover{background:var(--gold2)}
+.modal-more{text-align:center;margin-top:22px;font-size:.8rem}
+.modal-more a{color:var(--gold);border-bottom:1px solid var(--b)}
+.modal-more a:hover{border-color:var(--gold)}
+@media(max-width:768px){
+  .pgrid{grid-template-columns:1fr}
+  .modal-head,.modal-body{padding-left:22px;padding-right:22px}
+}
 </style>
 </head>
 <body>
@@ -305,6 +337,7 @@ footer{background:var(--bg2);border-top:1px solid var(--b);transition:background
       <li><a href="#compliance">Compliance</a></li>
       <li><a href="#proceso">Proceso</a></li>
       <li><a href="#contacto">Contacto</a></li>
+      <li><a href="javascript:void(0)" onclick="openPlansModal()" style="color:var(--gold)">Planes</a></li>
     </ul>
     <div class="nav-r">
       <button class="btn-th" id="thBtn" aria-label="Cambiar tema">☀</button>
@@ -319,6 +352,59 @@ footer{background:var(--bg2);border-top:1px solid var(--b);transition:background
   <a href="#compliance" onclick="cm()">Compliance</a>
   <a href="#proceso" onclick="cm()">Proceso</a>
   <a href="#contacto" onclick="cm()">Agendar consulta</a>
+  <a href="javascript:void(0)" onclick="cm();openPlansModal()">Planes</a>
+</div>
+
+<div class="modal-overlay" id="plansModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closePlansModal()" aria-label="Cerrar">✕</button>
+    <div class="modal-head">
+      <h2>Planes de Suscripción</h2>
+      <p>Infraestructura legal profesional para abogados independientes</p>
+    </div>
+    <div class="modal-body">
+      <div class="pgrid">
+        <div class="pcard">
+          <div class="pname">Starter</div>
+          <div class="pprice">$45<span style="font-size:.55em">/mes</span></div>
+          <ul class="pfeat">
+            <li>Correo corporativo</li>
+            <li>5 plantillas básicas</li>
+            <li>CRM de casos</li>
+            <li>Co-counsel (30%)</li>
+            <li>Boletín semanal</li>
+          </ul>
+          <a href="login.html?plan=Starter" class="pbtn">Comenzar</a>
+        </div>
+        <div class="pcard featured">
+          <div class="pbadge">Más popular</div>
+          <div class="pname">Professional</div>
+          <div class="pprice">$90<span style="font-size:.55em">/mes</span></div>
+          <ul class="pfeat">
+            <li>Correo corporativo</li>
+            <li>20+ plantillas + copilot</li>
+            <li>CRM completo</li>
+            <li>Office hours mensuales</li>
+            <li>Co-counsel (25%)</li>
+          </ul>
+          <a href="login.html?plan=Professional" class="pbtn">Comenzar</a>
+        </div>
+        <div class="pcard">
+          <div class="pname">Enterprise</div>
+          <div class="pprice">$150<span style="font-size:.55em">/mes</span></div>
+          <ul class="pfeat">
+            <li>Correo corporativo</li>
+            <li>Plantillas ilimitadas</li>
+            <li>CRM + API</li>
+            <li>Office hours + privadas</li>
+            <li>Co-counsel (20%)</li>
+          </ul>
+          <a href="login.html?plan=Enterprise" class="pbtn">Comenzar</a>
+        </div>
+      </div>
+      <div class="modal-more"><a href="suscripciones.html">Ver comparativa completa de planes →</a></div>
+    </div>
+  </div>
 </div>
 
 <!-- HERO SLIDER -->
@@ -805,6 +891,16 @@ function submitForm() {
   document.getElementById('fBody').style.display = 'none';
   document.getElementById('fOk').classList.add('on');
 }
+
+/* PLANES MODAL */
+function openPlansModal() { document.getElementById('plansModal').classList.add('on'); }
+function closePlansModal() { document.getElementById('plansModal').classList.remove('on'); }
+document.getElementById('plansModal').addEventListener('click', function(e) {
+  if (e.target === this) closePlansModal();
+});
+window.addEventListener('load', function() {
+  setTimeout(openPlansModal, 8000);
+});
 </script>
 </body>
 </html>

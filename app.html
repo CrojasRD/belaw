@@ -321,6 +321,7 @@
     <ul class="sidebar-menu">
       <li><a href="#" class="active" onclick="showSection('dashboard')"><i class="fas fa-chart-line"></i> Dashboard</a></li>
       <li><a href="#" onclick="showSection('consultas')"><i class="fas fa-file-contract"></i> Consultas</a></li>
+      <li><a href="#" onclick="showSection('solicitudes')"><i class="fas fa-credit-card"></i> Solicitudes de Plan</a></li>
       <li><a href="#" onclick="showSection('clientes')"><i class="fas fa-users"></i> Clientes</a></li>
       <li><a href="#" onclick="showSection('casos')"><i class="fas fa-briefcase"></i> Casos</a></li>
       <li><a href="#" onclick="showSection('seguimiento')"><i class="fas fa-tasks"></i> Seguimiento</a></li>
@@ -389,27 +390,46 @@
     <div id="consultas-section" style="display: none;">
       <div class="header">
         <h1>Consultas</h1>
-        <button class="btn" onclick="alert('Nueva consulta')"><i class="fas fa-plus"></i> Nueva</button>
       </div>
       <div class="content-section">
         <table class="table">
           <thead>
             <tr>
-              <th>ID</th>
               <th>Cliente</th>
-              <th>Asunto</th>
-              <th>Fecha</th>
+              <th>Empresa</th>
+              <th>Servicio</th>
+              <th>Cita</th>
+              <th>Contacto</th>
+              <th>Estado</th>
+            </tr>
+          </thead>
+          <tbody id="consultas-full-table">
+            <tr><td colspan="6" class="loading">Cargando datos...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- SOLICITUDES DE PLAN SECTION -->
+    <div id="solicitudes-section" style="display: none;">
+      <div class="header">
+        <h1>Solicitudes de Plan</h1>
+      </div>
+      <div class="content-section">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Empresa</th>
+              <th>Plan</th>
+              <th>Método de pago</th>
+              <th>Contacto</th>
+              <th>Estado</th>
               <th>Acción</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td>#001</td>
-              <td>Empresa ABC</td>
-              <td>Asesoría legal</td>
-              <td>2026-08-04</td>
-              <td><button class="btn" style="padding: 6px 12px; font-size: 0.8rem;">Ver</button></td>
-            </tr>
+          <tbody id="solicitudes-table">
+            <tr><td colspan="7" class="loading">Cargando datos...</td></tr>
           </tbody>
         </table>
       </div>
@@ -545,37 +565,80 @@
     }
   }
 
+  function esc(s) { return (s || '').toString().replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
   async function loadDashboardData() {
     try {
-      // Load stats
-      const consultasSnap = await db.collection('consultas').where('userId', '==', currentUser.uid).get();
+      const consultasSnap = await db.collection('consultas').orderBy('creadoEn', 'desc').get();
       document.getElementById('stat-consultas').textContent = consultasSnap.size;
 
-      const casosSnap = await db.collection('casos').where('userId', '==', currentUser.uid).where('estado', '==', 'activo').get();
+      const casosSnap = await db.collection('casos').where('estado', '==', 'activo').get();
       document.getElementById('stat-casos').textContent = casosSnap.size;
 
-      const clientesSnap = await db.collection('clientes').where('userId', '==', currentUser.uid).get();
+      const clientesSnap = await db.collection('clientes').get();
       document.getElementById('stat-clientes').textContent = clientesSnap.size;
 
-      // Load consultas table
-      let html = '';
+      // Mini tabla del dashboard (últimas 5)
+      let mini = '';
+      let full = '';
+      let i = 0;
       consultasSnap.forEach(doc => {
         const data = doc.data();
-        html += `
-          <tr>
-            <td>${data.cliente}</td>
-            <td>${data.tipo}</td>
-            <td>${data.fecha}</td>
-            <td><span class="badge badge-active">Nuevo</span></td>
-          </tr>
-        `;
+        const estadoBadge = data.estado === 'atendido'
+          ? '<span class="badge badge-completed">Atendido</span>'
+          : '<span class="badge badge-pending">Nuevo</span>';
+        if (i < 5) {
+          mini += `<tr><td>${esc(data.nombre)}</td><td>${esc(data.servicio)}</td><td>${esc(data.fecha)}</td><td>${estadoBadge}</td></tr>`;
+        }
+        full += `<tr>
+          <td>${esc(data.nombre)}</td>
+          <td>${esc(data.empresa)}</td>
+          <td>${esc(data.servicio)}</td>
+          <td>${esc(data.fecha)} · ${esc(data.hora)}</td>
+          <td>${esc(data.correo)}<br>${esc(data.telefono)}</td>
+          <td>${estadoBadge}</td>
+        </tr>`;
+        i++;
       });
-      if (html) {
-        document.getElementById('consultas-table').innerHTML = html;
-      }
+      document.getElementById('consultas-table').innerHTML = mini || '<tr><td colspan="4" class="loading">Sin consultas aún</td></tr>';
+      document.getElementById('consultas-full-table').innerHTML = full || '<tr><td colspan="6" class="loading">Sin consultas aún</td></tr>';
+
+      // Solicitudes de plan
+      const solSnap = await db.collection('solicitudes_plan').orderBy('creadoEn', 'desc').get();
+      let solHtml = '';
+      solSnap.forEach(doc => {
+        const data = doc.data();
+        const estadoBadge = data.estado === 'activo'
+          ? '<span class="badge badge-active">Activo</span>'
+          : '<span class="badge badge-pending">Pendiente de pago</span>';
+        const accion = data.estado === 'activo'
+          ? '—'
+          : `<button class="btn" style="padding:6px 12px;font-size:.8rem" onclick="activarSolicitud('${doc.id}')">Marcar como pagado</button>`;
+        solHtml += `<tr>
+          <td>${esc(data.nombre)}</td>
+          <td>${esc(data.empresa)}</td>
+          <td>${esc(data.plan)}</td>
+          <td>${esc(data.metodoPago)}</td>
+          <td>${esc(data.correo)}<br>${esc(data.telefono)}</td>
+          <td>${estadoBadge}</td>
+          <td>${accion}</td>
+        </tr>`;
+      });
+      document.getElementById('solicitudes-table').innerHTML = solHtml || '<tr><td colspan="7" class="loading">Sin solicitudes aún</td></tr>';
 
     } catch (e) {
       console.error('Error loading dashboard data:', e);
+    }
+  }
+
+  async function activarSolicitud(id) {
+    if (!confirm('¿Confirmas que el pago fue recibido y quieres marcar esta solicitud como activa?\n\nRecuerda: esto NO crea la cuenta de acceso automáticamente. Debes crearla tú en Firebase Authentication + Firestore (colección users) como ya lo has hecho antes.')) return;
+    try {
+      await db.collection('solicitudes_plan').doc(id).update({ estado: 'activo' });
+      loadDashboardData();
+    } catch (e) {
+      console.error('Error activando solicitud:', e);
+      alert('No se pudo actualizar la solicitud.');
     }
   }
 

@@ -97,6 +97,31 @@ a{text-decoration:none;color:inherit}
   .comptbl{font-size:.75rem}
   .comptbl th,.comptbl td{padding:10px 8px}
 }
+
+/* SOLICITUD MODAL */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(4px);z-index:1000;align-items:center;justify-content:center;padding:20px}
+.modal-overlay.on{display:flex;animation:fadeIn .3s}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.modal{background:var(--bg2);border:1px solid var(--b);border-radius:12px;width:100%;max-width:460px;max-height:88vh;overflow-y:auto;position:relative;animation:slideUp .4s}
+@keyframes slideUp{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}
+.modal-close{position:absolute;top:16px;right:16px;width:36px;height:36px;background:none;border:1px solid var(--b);color:var(--t2);font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;z-index:10}
+.modal-close:hover{border-color:var(--gold);color:var(--gold)}
+.modal-head{padding:30px 30px 4px}
+.modal-head h2{font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--t1);margin-bottom:6px}
+.modal-head p{font-size:.8rem;color:var(--t2)}
+.modal-body{padding:16px 30px 30px}
+.mfg{margin-bottom:16px}
+.mfg label{display:block;font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.mfg input,.mfg select{width:100%;padding:10px 12px;background:var(--bg);border:1px solid var(--b);color:var(--t1);border-radius:4px;font-family:inherit;font-size:.85rem}
+.mfg input:focus,.mfg select:focus{outline:none;border-color:var(--gold)}
+.msub{width:100%;padding:12px;background:var(--gold);color:#0D0D0D;border:none;font-weight:600;font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:background .2s;margin-top:6px}
+.msub:hover{background:var(--gold2)}
+.msub:disabled{opacity:.6;cursor:default}
+.mok{display:none;text-align:center;padding:10px 0 6px}
+.mok.on{display:block}
+.mok-i{width:54px;height:54px;border-radius:50%;background:var(--gold);color:#0D0D0D;font-size:1.6rem;display:flex;align-items:center;justify-content:center;margin:0 auto 16px}
+.mok h3{font-family:'Cormorant Garamond',serif;font-size:1.3rem;margin-bottom:8px;color:var(--t1)}
+.mok p{font-size:.82rem;color:var(--t2);line-height:1.6}
 </style>
 </head>
 <body>
@@ -145,7 +170,7 @@ a{text-decoration:none;color:inherit}
         <li>Directorio belaw.ec</li>
         <li>Referral network</li>
       </ul>
-      <button class="pbtn pbtn-alt" onclick="goToRegister('Starter')">Comenzar Gratis</button>
+      <button class="pbtn pbtn-alt" onclick="openSolicitud('Starter')">Comenzar</button>
     </div>
 
     <!-- PROFESSIONAL -->
@@ -164,7 +189,7 @@ a{text-decoration:none;color:inherit}
         <li>Auditoría LOPDP (anual 1x)</li>
         <li>Base datos jurídica (completa)</li>
       </ul>
-      <button class="pbtn" onclick="goToRegister('Professional')">Comenzar Ahora</button>
+      <button class="pbtn" onclick="openSolicitud('Professional')">Comenzar Ahora</button>
     </div>
 
     <!-- ENTERPRISE -->
@@ -182,10 +207,44 @@ a{text-decoration:none;color:inherit}
         <li>Base datos jurídica + alertas</li>
         <li>Gestor honorarios + facturación</li>
       </ul>
-      <button class="pbtn pbtn-alt" onclick="goToRegister('Enterprise')">Comenzar Ahora</button>
+      <button class="pbtn pbtn-alt" onclick="openSolicitud('Enterprise')">Comenzar Ahora</button>
     </div>
   </div>
 </section>
+
+<div class="modal-overlay" id="solModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeSolicitud()" aria-label="Cerrar">✕</button>
+    <div class="modal-head">
+      <h2>Solicitar plan <span id="solPlanName" style="color:var(--gold)"></span></h2>
+      <p>Completa tus datos y elige cómo prefieres pagar. Un asesor activará tu cuenta apenas se confirme el pago.</p>
+    </div>
+    <div class="modal-body">
+      <form id="solForm" onsubmit="submitSolicitud(event)">
+        <div class="mfg"><label>Nombre *</label><input type="text" id="sol-nombre" required></div>
+        <div class="mfg"><label>Correo *</label><input type="email" id="sol-correo" required></div>
+        <div class="mfg"><label>Teléfono / WhatsApp *</label><input type="tel" id="sol-telefono" required></div>
+        <div class="mfg"><label>Empresa</label><input type="text" id="sol-empresa"></div>
+        <div class="mfg">
+          <label>Método de pago *</label>
+          <select id="sol-metodo" required>
+            <option value="">-- Seleccione --</option>
+            <option>PayPal</option>
+            <option>Tarjeta de crédito/débito</option>
+            <option>Transferencia bancaria</option>
+            <option>Deuna</option>
+          </select>
+        </div>
+        <button class="msub" type="submit">Enviar solicitud</button>
+      </form>
+      <div class="mok" id="solOk">
+        <div class="mok-i">✓</div>
+        <h3>Solicitud recibida</h3>
+        <p>Te contactaremos con las instrucciones de pago para tu método elegido. Una vez confirmado, activaremos tu cuenta y te enviaremos el acceso.</p>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- COMPARISON TABLE -->
 <section class="sec">
@@ -313,9 +372,60 @@ a{text-decoration:none;color:inherit}
   </div>
 </footer>
 
+<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore-compat.js"></script>
 <script>
-function goToRegister(plan) {
-  window.location.href = 'login.html?plan=' + plan;
+const firebaseConfig = {
+  apiKey: "AIzaSyCjJShDdCD1NMDZQeY-7cCBVjm0eswrwnw",
+  authDomain: "belaw-ec.firebaseapp.com",
+  projectId: "belaw-ec",
+  storageBucket: "belaw-ec.firebasestorage.app",
+  messagingSenderId: "1044526877103",
+  appId: "1:1044526877103:web:9a88172d082953c5bd475a"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+let solPlan = '';
+
+function openSolicitud(plan) {
+  solPlan = plan;
+  document.getElementById('solPlanName').textContent = plan;
+  document.getElementById('solForm').style.display = 'block';
+  document.getElementById('solOk').classList.remove('on');
+  document.getElementById('solModal').classList.add('on');
+}
+function closeSolicitud() {
+  document.getElementById('solModal').classList.remove('on');
+}
+document.getElementById('solModal').addEventListener('click', function(e) {
+  if (e.target === this) closeSolicitud();
+});
+
+function submitSolicitud(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('.msub');
+  btn.disabled = true;
+  btn.textContent = 'Enviando...';
+
+  db.collection('solicitudes_plan').add({
+    nombre: document.getElementById('sol-nombre').value.trim(),
+    correo: document.getElementById('sol-correo').value.trim(),
+    telefono: document.getElementById('sol-telefono').value.trim(),
+    empresa: document.getElementById('sol-empresa').value.trim(),
+    metodoPago: document.getElementById('sol-metodo').value,
+    plan: solPlan,
+    estado: 'pendiente_pago',
+    creadoEn: firebase.firestore.FieldValue.serverTimestamp()
+  }).then(function() {
+    document.getElementById('solForm').style.display = 'none';
+    document.getElementById('solOk').classList.add('on');
+  }).catch(function(err) {
+    console.error('Error al guardar la solicitud:', err);
+    alert('No se pudo enviar la solicitud. Intenta de nuevo.');
+    btn.disabled = false;
+    btn.textContent = 'Enviar solicitud';
+  });
 }
 
 // Cargar tema guardado

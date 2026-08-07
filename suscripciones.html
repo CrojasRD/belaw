@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Planes de Suscripción · Belaw Ec</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--gold:#B8913A;--gold2:#CDA94A;--gdim:rgba(184,145,58,.12)}
+[data-theme=dark]{
+  --bg:#0D0D0D;--bg2:#141414;--bg3:#1A1A1A;--bgc:#111111;
+  --t1:#F0EBE1;--t2:#9A9388;--t3:#5A5550;
+  --b:rgba(184,145,58,.18);--b2:rgba(255,255,255,.06);
+  --nav:rgba(13,13,13,.93);--sh:0 12px 48px rgba(0,0,0,.55);
+  --scrim:linear-gradient(90deg,#0D0D0D 0%,rgba(13,13,13,.55) 55%,transparent 100%)}
+[data-theme=light]{
+  --bg:#F5F2EC;--bg2:#EDE9E0;--bg3:#E4DFD0;--bgc:#FDFCF9;
+  --t1:#18160F;--t2:#5A5448;--t3:#9A9388;
+  --b:rgba(110,80,15,.2);--b2:rgba(0,0,0,.06);
+  --nav:rgba(245,242,236,.95);--sh:0 12px 48px rgba(0,0,0,.1);
+  --scrim:linear-gradient(90deg,#F5F2EC 0%,rgba(245,242,236,.55) 55%,transparent 100%)}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--t1);overflow-x:hidden;transition:background .35s,color .35s}
+a{text-decoration:none;color:inherit}
+
+/* NAV */
+#nav{position:fixed;top:0;left:0;right:0;z-index:900;background:var(--nav);backdrop-filter:blur(18px);border-bottom:1px solid var(--b);transition:background .35s,border-color .35s}
+.nav-in{max-width:1240px;margin:0 auto;padding:0 5%;height:68px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-sq{width:34px;height:34px;border:1.5px solid var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-weight:600;font-size:.95rem;color:var(--gold);flex-shrink:0}
+.logo-nm{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.25rem;letter-spacing:.06em;color:var(--t1);transition:color .35s}
+.logo-nm b{color:var(--gold)}
+.nav-ul{display:flex;gap:28px;list-style:none}
+.nav-ul a{font-size:.7rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--t2);transition:color .2s;white-space:nowrap}
+.nav-ul a:hover{color:var(--gold)}
+.nav-r{display:flex;align-items:center;gap:10px}
+.btn-th{width:38px;height:38px;border:1px solid var(--b);background:transparent;cursor:pointer;color:var(--t2);font-size:1.1rem;display:flex;align-items:center;justify-content:center;transition:all .2s;line-height:1}
+.btn-th:hover{border-color:var(--gold);color:var(--gold)}
+.btn-cta{background:var(--gold);color:#0D0D0D;padding:.5rem 1.4rem;font-size:.7rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;border:none;cursor:pointer;transition:background .2s;white-space:nowrap;display:inline-block}
+.btn-cta:hover{background:var(--gold2)}
+
+/* LAYOUT */
+.sec{padding:90px 5%;max-width:1240px;margin:0 auto}
+.ey{font-size:.65rem;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.ey::before{content:'';width:22px;height:1px;background:var(--gold);flex-shrink:0}
+.sh{font-family:'Cormorant Garamond',serif;font-size:clamp(1.85rem,3vw,2.9rem);font-weight:400;line-height:1.15;color:var(--t1);margin-bottom:12px;transition:color .35s}
+.sp{font-size:.88rem;font-weight:300;line-height:1.85;color:var(--t2);max-width:600px;transition:color .35s}
+
+/* PRICING GRID */
+.pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
+.pcard{background:var(--bgc);border:1px solid var(--b);padding:40px 32px;position:relative;transition:all .35s}
+.pcard:hover{border-color:var(--gold);background:var(--bg3);transform:translateY(-8px);box-shadow:0 24px 64px rgba(0,0,0,.4)}
+.pcard.featured{border-color:var(--gold);background:var(--gdim);transform:scale(1.05)}
+.pcard.featured .pbadge{display:block}
+.pbadge{display:none;position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--gold);color:#0D0D0D;padding:6px 16px;font-size:.62rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;border-radius:20px}
+.pname{font-family:'Cormorant Garamond',serif;font-size:1.8rem;color:var(--t1);margin-bottom:8px;font-weight:600}
+.pprice{font-size:2.2rem;color:var(--gold);font-weight:600;margin-bottom:4px}
+.pprice-sub{font-size:.75rem;color:var(--t2);margin-bottom:28px}
+.pfeat{list-style:none;margin-bottom:32px}
+.pfeat li{padding:12px 0;border-bottom:1px solid var(--b);font-size:.88rem;color:var(--t2);display:flex;align-items:center;gap:8px}
+.pfeat li::before{content:'✓';color:var(--gold);font-weight:600;font-size:1.1rem;flex-shrink:0}
+.pbtn{width:100%;padding:12px;background:var(--gold);color:#0D0D0D;border:none;font-weight:600;cursor:pointer;transition:all .2s;font-size:.85rem;letter-spacing:.06em;text-transform:uppercase}
+.pbtn:hover{background:var(--gold2);transform:translateY(-2px)}
+.pbtn-alt{background:transparent;border:1px solid var(--b);color:var(--t2)}
+.pbtn-alt:hover{border-color:var(--gold);color:var(--gold)}
+
+/* COMPARISON TABLE */
+.comph{margin-top:80px;padding-top:80px;border-top:1px solid var(--b)}
+.comptbl{width:100%;margin-top:32px;border-collapse:collapse}
+.comptbl th,.comptbl td{padding:14px 16px;text-align:left;border-bottom:1px solid var(--b);font-size:.85rem}
+.comptbl th{background:var(--bg3);font-weight:600;color:var(--gold)}
+.comptbl td{color:var(--t2)}
+.comptbl tr:hover{background:var(--bg3)}
+.comptbl td:first-child{font-weight:500;color:var(--t1)}
+
+/* FOOTER */
+.footer{background:var(--bg2);border-top:1px solid var(--b);padding:60px 5%;margin-top:80px;transition:background .35s,border-color .35s}
+.footer-in{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px}
+.footer-br{margin-bottom:20px}
+.footer-t{font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+.footer-l{list-style:none;font-size:.85rem}
+.footer-l li{margin-bottom:10px}
+.footer-l a{color:var(--t2);transition:color .2s}
+.footer-l a:hover{color:var(--gold)}
+
+@media(max-width:1040px){
+  .pgrid{grid-template-columns:1fr;gap:20px}
+  .pcard.featured{transform:scale(1)}
+  .footer-in{grid-template-columns:1fr 1fr;gap:32px}
+}
+
+@media(max-width:640px){
+  .sec{padding:60px 5%}
+  .pgrid{gap:16px}
+  .pcard{padding:28px 20px}
+  .comptbl{font-size:.75rem}
+  .comptbl th,.comptbl td{padding:10px 8px}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-in">
+    <a href="index.html" class="logo">
+      <div class="logo-sq">⚖️</div>
+      <div class="logo-nm">Belaw <b>Ec</b></div>
+    </a>
+    <ul class="nav-ul">
+      <li><a href="index.html#nosotros">Nosotros</a></li>
+      <li><a href="index.html#servicios">Servicios</a></li>
+      <li><a href="index.html#contacto">Contacto</a></li>
+      <li><a href="suscripciones.html" style="color:var(--gold)">Suscripción</a></li>
+    </ul>
+    <div class="nav-r">
+      <button class="btn-th" id="thBtn" aria-label="Cambiar tema">☀</button>
+      <a href="login.html" class="btn-cta">Ingresar</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="sec" style="padding-top:140px;padding-bottom:60px">
+  <div class="ey">Planes de Suscripción</div>
+  <h1 class="sh">Infraestructura legal <em>profesional</em><br>para abogados independientes</h1>
+  <p class="sp">Acceso a herramientas, especialistas y comunidad legal. Elige el plan que se ajuste a tus necesidades.</p>
+</section>
+
+<!-- PRICING CARDS -->
+<section class="sec">
+  <div class="pgrid">
+    <!-- STARTER -->
+    <div class="pcard">
+      <h3 class="pname">Starter</h3>
+      <div class="pprice">$45<span style="font-size:.6em">/mes</span></div>
+      <div class="pprice-sub">Para iniciar</div>
+      <ul class="pfeat">
+        <li>Correo corporativo @belaw-ec.com</li>
+        <li>5 plantillas jurídicas básicas</li>
+        <li>CRM de casos (básico)</li>
+        <li>Acceso co-counsel (30% honorarios)</li>
+        <li>Boletín jurídico semanal</li>
+        <li>Directorio belaw.ec</li>
+        <li>Referral network</li>
+      </ul>
+      <button class="pbtn pbtn-alt" onclick="goToRegister('Starter')">Comenzar Gratis</button>
+    </div>
+
+    <!-- PROFESSIONAL -->
+    <div class="pcard featured">
+      <div class="pbadge">Más Popular</div>
+      <h3 class="pname">Professional</h3>
+      <div class="pprice">$90<span style="font-size:.6em">/mes</span></div>
+      <div class="pprice-sub">Recomendado</div>
+      <ul class="pfeat">
+        <li>Correo corporativo @belaw-ec.com</li>
+        <li>20+ plantillas + copilot</li>
+        <li>CRM de casos (completo)</li>
+        <li>Office hours mensuales</li>
+        <li>Acceso co-counsel (25% honorarios)</li>
+        <li>Boletín jurídico semanal</li>
+        <li>Auditoría LOPDP (anual 1x)</li>
+        <li>Base datos jurídica (completa)</li>
+      </ul>
+      <button class="pbtn" onclick="goToRegister('Professional')">Comenzar Ahora</button>
+    </div>
+
+    <!-- ENTERPRISE -->
+    <div class="pcard">
+      <h3 class="pname">Enterprise</h3>
+      <div class="pprice">$150<span style="font-size:.6em">/mes</span></div>
+      <div class="pprice-sub">Para firmas</div>
+      <ul class="pfeat">
+        <li>Correo corporativo @belaw-ec.com</li>
+        <li>Plantillas ilimitadas + soporte</li>
+        <li>CRM completo + API</li>
+        <li>Office hours + sesiones privadas</li>
+        <li>Co-counsel prioritario (20% + SLA 24h)</li>
+        <li>Auditoría LOPDP (trimestral)</li>
+        <li>Base datos jurídica + alertas</li>
+        <li>Gestor honorarios + facturación</li>
+      </ul>
+      <button class="pbtn pbtn-alt" onclick="goToRegister('Enterprise')">Comenzar Ahora</button>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARISON TABLE -->
+<section class="sec">
+  <div class="comph">
+    <h2 class="sh">Comparativa Completa</h2>
+    <table class="comptbl">
+      <thead>
+        <tr>
+          <th>Característica</th>
+          <th>Starter</th>
+          <th>Professional</th>
+          <th>Enterprise</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Correo corporativo</td>
+          <td>✓</td>
+          <td>✓</td>
+          <td>✓</td>
+        </tr>
+        <tr>
+          <td>Plantillas jurídicas</td>
+          <td>5 básicas</td>
+          <td>20+ + copilot</td>
+          <td>Ilimitadas</td>
+        </tr>
+        <tr>
+          <td>CRM de casos</td>
+          <td>Básico</td>
+          <td>Completo</td>
+          <td>Completo + API</td>
+        </tr>
+        <tr>
+          <td>Office hours</td>
+          <td>–</td>
+          <td>Mensual</td>
+          <td>Mensual + privadas</td>
+        </tr>
+        <tr>
+          <td>Co-counsel</td>
+          <td>30%</td>
+          <td>25%</td>
+          <td>20% + SLA 24h</td>
+        </tr>
+        <tr>
+          <td>Auditoría LOPDP</td>
+          <td>–</td>
+          <td>1x/año</td>
+          <td>Trimestral</td>
+        </tr>
+        <tr>
+          <td>Base de datos jurídica</td>
+          <td>Básica</td>
+          <td>Completa</td>
+          <td>Completa + alertas</td>
+        </tr>
+        <tr>
+          <td>Gestor honorarios</td>
+          <td>–</td>
+          <td>–</td>
+          <td>✓</td>
+        </tr>
+        <tr>
+          <td>Boletín jurídico</td>
+          <td>✓</td>
+          <td>✓</td>
+          <td>✓</td>
+        </tr>
+        <tr>
+          <td>Directorio belaw.ec</td>
+          <td>✓</td>
+          <td>✓</td>
+          <td>✓</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="sec" style="text-align:center;padding:80px 5%">
+  <h2 class="sh">¿Preguntas sobre los planes?</h2>
+  <p class="sp" style="margin:20px auto 40px;max-width:500px">Contáctanos para una demostración personalizada o para discutir opciones empresariales customizadas.</p>
+  <a href="index.html#contacto" class="btn-cta">Enviar Consulta</a>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-in">
+    <div>
+      <div class="footer-br">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:20px">
+          <div class="logo-sq" style="width:28px;height:28px">⚖️</div>
+          <div style="font-weight:600;color:var(--t1)">Belaw Ec</div>
+        </div>
+      </div>
+      <p style="font-size:.8rem;color:var(--t2);line-height:1.6">Asesoría legal empresarial especializada en derecho corporativo, LOPDP, laboral y litigios para empresas ecuatorianas.</p>
+    </div>
+    <div>
+      <div class="footer-t">Empresa</div>
+      <ul class="footer-l">
+        <li><a href="index.html#nosotros">Nosotros</a></li>
+        <li><a href="index.html#servicios">Servicios</a></li>
+        <li><a href="suscripciones.html">Planes</a></li>
+        <li><a href="index.html#contacto">Contacto</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-t">Legal</div>
+      <ul class="footer-l">
+        <li><a href="#">Términos de Uso</a></li>
+        <li><a href="#">Privacidad</a></li>
+        <li><a href="#">Cookies</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-t">Conecta</div>
+      <ul class="footer-l">
+        <li><a href="#">LinkedIn</a></li>
+        <li><a href="#">Email</a></li>
+        <li><a href="#">WhatsApp</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<script>
+function goToRegister(plan) {
+  window.location.href = 'login.html?plan=' + plan;
+}
+
+// Cargar tema guardado
+const saved = localStorage.getItem('theme') || 'dark';
+document.documentElement.dataset.theme = saved;
+
+// Toggle tema
+window.addEventListener('load', () => {
+  const thBtn = document.getElementById('thBtn');
+  if (thBtn) {
+    thBtn.addEventListener('click', function() {
+      const html = document.documentElement;
+      html.dataset.theme = html.dataset.theme === 'dark' ? 'light' : 'dark';
+      localStorage.setItem('theme', html.dataset.theme);
+    });
+  }
+});
+</script>
+
+</body>
+</html>
